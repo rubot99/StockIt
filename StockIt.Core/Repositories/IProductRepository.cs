@@ -14,11 +14,4 @@ namespace StockIt.Core.Repositories
         List<Product> SearchByLocation(string location);
         List<Product> SearchByName(string name);
     }
-
-    public interface IRepository<T>
-    {
-        T AddAsync(T t, string tenant);
-        bool DeleteAsync(T t, string tenant);
-        T UpdateAsync(T t, string tenant);
-    }
 }
