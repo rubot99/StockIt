@@ -5,11 +5,15 @@ using System.Text;
 
 namespace StockIt.Core.Repositories
 {
-    public interface IProductRepository
-    {
-        Product AddAsync(Product product, string tenant);
-        bool DeleteAsync(Product product, string tenant);
-        Product UpdateAsync(Product product, string tenant);
+    public interface IProductRepository : IRepository<Product>
+    {       
         Product GetByName(string name, string tenant);        
+    }
+
+    public interface IRepository<T>
+    {
+        T AddAsync(T t, string tenant);
+        bool DeleteAsync(T t, string tenant);
+        T UpdateAsync(T t, string tenant);
     }
 }

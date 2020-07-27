@@ -10,5 +10,6 @@ namespace StockIt.Core.Models
         public string Category { get; set; }
         public double Stock { get; set; }
         public List<string> Barcodes { get; set; } = new List<string>();
+        public string Location { get; set; }
     }
 }
