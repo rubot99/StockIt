@@ -49,6 +49,26 @@ namespace StockIt.Core.Repositories
              && x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase));
         }
 
+        public List<Product> SearchByCategory(string category)
+        {
+            return store.Where(x => x.Category.Contains(category)).ToList();
+        }
+
+        public List<Product> SearchById(string id)
+        {
+            return store.Where(x => x.Id.Contains(id)).ToList();
+        }
+
+        public List<Product> SearchByLocation(string location)
+        {
+            return store.Where(x => x.Location.Contains(location)).ToList();
+        }
+
+        public List<Product> SearchByName(string name)
+        {
+            return store.Where(x => x.Name.Contains(name)).ToList();
+        }
+
         public Product UpdateAsync(Product product, string tenant)
         {
             bool result = false;
