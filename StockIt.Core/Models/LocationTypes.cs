@@ -4,7 +4,7 @@ namespace StockIt.Core.Models
 {
     public class LocationTypes : BaseModel
     {
-        public List<ReferenceType> Locations { get; set; }
-
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

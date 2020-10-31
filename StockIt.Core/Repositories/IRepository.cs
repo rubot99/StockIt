@@ -1,9 +1,13 @@
-﻿namespace StockIt.Core.Repositories
+﻿using StockIt.Core.Models;
+using System.Threading.Tasks;
+
+namespace StockIt.Core.Repositories
 {
     public interface IRepository<T>
     {
-        T AddAsync(T t, string tenant);
-        bool DeleteAsync(T t, string tenant);
-        T UpdateAsync(T t, string tenant);
+        T Add(T t);
+        bool Delete(T t);
+        T Update(T t);
+        T Get(string id, string tenant);
     }
 }

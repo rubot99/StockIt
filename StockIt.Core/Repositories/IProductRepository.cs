@@ -6,11 +6,8 @@ using System.Text;
 namespace StockIt.Core.Repositories
 {
     public interface IProductRepository : IRepository<Product>
-    {       
-        Product GetByName(string name, string tenant);
-
-        List<Product> SearchById(string id);
-        List<Product> SearchByCategory(string category);
+    {
+        List<Product> SearchByTags(List<string> tags);
         List<Product> SearchByLocation(string location);
         List<Product> SearchByName(string name);
     }

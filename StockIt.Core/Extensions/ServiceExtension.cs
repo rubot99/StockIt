@@ -10,7 +10,7 @@ namespace StockIt.Core.Extensions
     {
         public static void AddMockedServices(this IServiceCollection services)
         {
-            services.AddSingleton<IProductRepository, MockProductRepository>();
+            ///services.AddSingleton<IProductRepository, MockProductRepository>();
         }
     }
 }
