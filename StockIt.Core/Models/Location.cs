@@ -2,7 +2,7 @@
 
 namespace StockIt.Core.Models
 {
-    public class LocationTypes : BaseModel
+    public class Location : BaseModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

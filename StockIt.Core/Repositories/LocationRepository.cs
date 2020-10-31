@@ -7,17 +7,17 @@ namespace StockIt.Core.Repositories
 {
     public class LocationRepository : ILocationRepository
     {
-        public LocationTypes Add(LocationTypes t)
+        public Location Add(Location t)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(LocationTypes t)
+        public bool Delete(Location t)
         {
             throw new NotImplementedException();
         }
 
-        public LocationTypes Get(string id, string tenant)
+        public Location Get(string id, string tenant)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +27,7 @@ namespace StockIt.Core.Repositories
             throw new NotImplementedException();
         }
 
-        public LocationTypes Update(LocationTypes t)
+        public Location Update(Location t)
         {
             throw new NotImplementedException();
         }
