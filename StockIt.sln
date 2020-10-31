@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockIt.Core", "StockIt.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockIt.Api", "StockIt.Api\StockIt.Api.csproj", "{C79C5012-02BF-44AE-A00E-6F7B3DED8FA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockIt.Api.Tests", "StockIt.Api.Tests\StockIt.Api.Tests.csproj", "{CB6D93FE-E6EB-4D9C-BA34-718C45B7376F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockIt.Web.Tests", "StockIt.Web.Tests\StockIt.Web.Tests.csproj", "{6148BD60-E01A-478F-B6E5-F41944F25C64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{C79C5012-02BF-44AE-A00E-6F7B3DED8FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C79C5012-02BF-44AE-A00E-6F7B3DED8FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C79C5012-02BF-44AE-A00E-6F7B3DED8FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB6D93FE-E6EB-4D9C-BA34-718C45B7376F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB6D93FE-E6EB-4D9C-BA34-718C45B7376F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB6D93FE-E6EB-4D9C-BA34-718C45B7376F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB6D93FE-E6EB-4D9C-BA34-718C45B7376F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6148BD60-E01A-478F-B6E5-F41944F25C64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6148BD60-E01A-478F-B6E5-F41944F25C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6148BD60-E01A-478F-B6E5-F41944F25C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6148BD60-E01A-478F-B6E5-F41944F25C64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
