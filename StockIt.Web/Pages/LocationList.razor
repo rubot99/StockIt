@@ -1,9 +1,9 @@
-﻿@page "/products"
-@inherits ProductListBase
+﻿@page "/locations"
+@inherits LocationListBase
 
-<h3>Product List</h3>
+<h3>LocationList</h3>
 
-@if (products == null)
+@if (locations == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -28,11 +28,11 @@ else
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var product in products)
+                        @foreach (var location in locations)
                         {
                             <tr>
-                                <td>@product.Id</td>
-                                <td>@product.Name</td>
+                                <td>@location.Id</td>
+                                <td>@location.Name</td>
                                 <td>
                                     <i class="fas fa-pen"></i>
                                 </td>
@@ -43,7 +43,7 @@ else
                         }
                     </tbody>
                 </table>
-                </div>
             </div>
         </div>
-}
+    </div>
+    }

@@ -11,7 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using StockIt.Core.Repositories;
+using StockIt.Core.Repositories.Location;
+using StockIt.Core.Repositories.Product;
+using StockIt.Core.Repositories.Tenant;
 
 namespace StockIt.Api
 {
@@ -30,7 +32,9 @@ namespace StockIt.Api
             Log.Logger = new LoggerConfiguration().CreateLogger();
 
             services.AddSingleton(Log.Logger);
-            services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
+            services.AddTransient<ITenantRepository, TenantRepository>();
 
             services.AddApiVersioning(config =>
             {

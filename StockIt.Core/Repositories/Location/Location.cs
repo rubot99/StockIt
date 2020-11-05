@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StockIt.Core.Models
+namespace StockIt.Core.Repositories.Location
 {
     public class Location : BaseModel
     {

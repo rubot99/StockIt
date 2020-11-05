@@ -1,9 +1,8 @@
-﻿using StockIt.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockIt.Core.Repositories
+namespace StockIt.Core.Repositories.Product
 {
     public interface IProductRepository : IRepository<Product>
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace StockIt.Core.Models
+namespace StockIt.Core.Repositories.Product
 {
     public class Product : BaseModel
     {

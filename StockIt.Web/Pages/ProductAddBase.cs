@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using StockIt.Core.Models;
+using StockIt.Core.Repositories.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;

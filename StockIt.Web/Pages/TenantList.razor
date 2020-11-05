@@ -1,9 +1,9 @@
-﻿@page "/products"
-@inherits ProductListBase
+﻿@page "/tenants"
+@inherits TenantListBase
+<h3>Tenant List</h3>
 
-<h3>Product List</h3>
 
-@if (products == null)
+@if (tenants == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -28,11 +28,11 @@ else
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var product in products)
+                        @foreach (var tenant in tenants)
                         {
                             <tr>
-                                <td>@product.Id</td>
-                                <td>@product.Name</td>
+                                <td>@tenant.Id</td>
+                                <td>@tenant.Name</td>
                                 <td>
                                     <i class="fas fa-pen"></i>
                                 </td>
@@ -46,4 +46,4 @@ else
                 </div>
             </div>
         </div>
-}
+                }

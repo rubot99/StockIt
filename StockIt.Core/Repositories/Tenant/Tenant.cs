@@ -1,4 +1,6 @@
-﻿namespace StockIt.Core.Models
+﻿using StockIt.Core.Repositories;
+
+namespace StockIt.Core.Repositories.Tenant
 {
     public class Tenant : BaseModel
     {

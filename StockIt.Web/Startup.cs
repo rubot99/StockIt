@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockIt.Core.Extensions;
-using StockIt.Core.Repositories;
+using StockIt.Core.Repositories.Product;
 using StockIt.Web.Data;
 
 namespace StockIt.Web
@@ -30,8 +30,7 @@ namespace StockIt.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
-            services.AddSingleton<IProductRepository, ProductRepository>();
+            services.AddHttpClient<ILocationDataService, LocationDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

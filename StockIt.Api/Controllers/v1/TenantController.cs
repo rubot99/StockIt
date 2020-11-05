@@ -5,36 +5,38 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using StockIt.Core.Repositories.Location;
+using StockIt.Core.Repositories.Tenant;
 
 namespace StockIt.Api.Controllers.v1
 {
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class LocationController : ControllerBase
+    public class TenantController : ControllerBase
     {
         private readonly ILogger logger;
-        private readonly ILocationRepository locationRepository;
+        private readonly ITenantRepository tenantRepository;
 
-        public LocationController(ILogger logger, ILocationRepository locationRepository)
+        public TenantController(ILogger logger, ITenantRepository tenantRepository)
         {
             this.logger = logger;
-            this.locationRepository = locationRepository;
+            this.tenantRepository = tenantRepository;
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] Location location)
+        public IActionResult Add([FromBody] Tenant tenant)
         {
-            var created = locationRepository.Add(location);
+            var created = tenantRepository.Add(tenant);
             return Ok(created.Id);
+
         }
 
         [HttpGet("tenant/{tenant}")]
         public IActionResult GetAll([FromRoute] string tenant)
         {
-            var locations = locationRepository.GetAll(tenant);
-            return Ok(locations);
+            var tenants = tenantRepository.GetAll(tenant);
+            return Ok(tenants);
+
         }
     }
 }

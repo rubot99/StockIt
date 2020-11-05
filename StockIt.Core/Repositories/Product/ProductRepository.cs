@@ -1,11 +1,10 @@
 ﻿using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
-using StockIt.Core.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StockIt.Core.Repositories
+namespace StockIt.Core.Repositories.Product
 {
     public class ProductRepository : IProductRepository
     {
@@ -36,6 +35,12 @@ namespace StockIt.Core.Repositories
                 return query.FirstOrDefault();
             }
         }
+
+        public List<Product> GetAll(string tenant)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<Product> SearchByCategory(string category)
         {
             throw new System.NotImplementedException();
