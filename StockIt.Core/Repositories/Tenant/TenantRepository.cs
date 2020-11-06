@@ -23,7 +23,13 @@ namespace StockIt.Core.Repositories.Tenant
 
         public bool Delete(Tenant t)
         {
-            throw new NotImplementedException();
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                session.Delete(t.Id);
+                session.SaveChanges();
+
+                return true;
+            }
         }
 
         public Tenant Get(string id)

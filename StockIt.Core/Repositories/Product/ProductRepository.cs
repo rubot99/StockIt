@@ -25,7 +25,13 @@ namespace StockIt.Core.Repositories.Product
 
         public bool Delete(Product t)
         {
-            throw new System.NotImplementedException();
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                session.Delete(t.Id);
+                session.SaveChanges();
+
+                return true;
+            }
         }
 
         public Product Get(string id, string tenant)

@@ -24,7 +24,13 @@ namespace StockIt.Core.Repositories.Location
 
         public bool Delete(Location t)
         {
-            throw new NotImplementedException();
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                session.Delete(t.Id);
+                session.SaveChanges();
+
+                return true;
+            }
         }
 
         public Location Get(string id, string tenant)

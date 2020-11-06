@@ -4,6 +4,7 @@ using StockIt.Web.Common;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace StockIt.Web.Data
@@ -11,10 +12,12 @@ namespace StockIt.Web.Data
     public class ProductDataService : IProductDataService
     {
         private readonly HttpClient httpClient;
+        private readonly Url url;
 
         public ProductDataService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
+            this.url = new Url($"{ConstantsClass.Url}/product");
         }
 
         public Task<Product> AddAsync(Product t)
@@ -22,9 +25,17 @@ namespace StockIt.Web.Data
             throw new NotImplementedException();
         }
 
+        public async Task<bool> DeleteAsync(string id)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"{url.ToString()}/id/{id}");
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+
+            return response.IsSuccessStatusCode;
+        }
+
         public async Task<List<Product>> GetAllAsync(string tenant)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, ConstantsClass.Url + "/" + $"product/tenant/{tenant}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{url.ToString()}/tenant/{tenant}");
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             var locations = new List<Product>();
 
@@ -34,6 +45,11 @@ namespace StockIt.Web.Data
             }
 
             return locations;
+        }
+
+        Task<bool> IDataService<Product>.DeleteAsync(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -51,5 +51,17 @@ namespace StockIt.Api.Controllers.v1
             var products = productRepository.GetAll(tenant);
             return Ok(products);
         }
+
+        [HttpDelete("id/{id}")]
+        public IActionResult Delete(string id)
+        {
+            var tenant = productRepository.Delete(
+                new Product
+                {
+                    Id = id
+                });
+
+            return Ok();
+        }
     }
 }

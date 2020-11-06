@@ -36,5 +36,17 @@ namespace StockIt.Api.Controllers.v1
             var locations = locationRepository.GetAll(tenant);
             return Ok(locations);
         }
+
+        [HttpDelete("id/{id}")]
+        public IActionResult Delete(string id)
+        {
+            var tenant = locationRepository.Delete(
+                new Location
+                {
+                    Id = id
+                });
+
+            return Ok();
+        }
     }
 }
