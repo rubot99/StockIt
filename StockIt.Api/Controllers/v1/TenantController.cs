@@ -28,15 +28,20 @@ namespace StockIt.Api.Controllers.v1
         {
             var created = tenantRepository.Add(tenant);
             return Ok(created.Id);
-
         }
 
-        [HttpGet("tenant/{tenant}")]
-        public IActionResult GetAll([FromRoute] string tenant)
+        [HttpGet()]
+        public IActionResult GetAll()
         {
-            var tenants = tenantRepository.GetAll(tenant);
+            var tenants = tenantRepository.GetAll();
             return Ok(tenants);
+        }
 
+        [HttpGet("id/{id}")]
+        public IActionResult Get(string id)
+        {
+            var tenant = tenantRepository.Get(id);
+            return Ok(tenant);
         }
     }
 }

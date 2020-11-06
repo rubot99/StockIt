@@ -11,6 +11,8 @@ namespace StockIt.Core.Repositories.Tenant
         {
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
+                t.Id = null;
+
                 session.Store(t);
 
                 session.SaveChanges();
@@ -24,12 +26,18 @@ namespace StockIt.Core.Repositories.Tenant
             throw new NotImplementedException();
         }
 
-        public Tenant Get(string id, string tenant)
+        public Tenant Get(string id)
         {
-            throw new NotImplementedException();
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                var query = session.Query<Tenant>()
+                    .Where(x => x.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
+
+                return query.FirstOrDefault();
+            }
         }
 
-        public List<Tenant> GetAll(string tenant)
+        public List<Tenant> GetAll()
         {
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {

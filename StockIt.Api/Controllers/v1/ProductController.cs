@@ -44,5 +44,12 @@ namespace StockIt.Api.Controllers.v1
             var products = productRepository.SearchByName(name);
             return Ok(products);
         }
+
+        [HttpGet("tenant/{tenant}")]
+        public IActionResult GetAll([FromRoute] string tenant)
+        {
+            var products = productRepository.GetAll(tenant);
+            return Ok(products);
+        }
     }
 }

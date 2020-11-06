@@ -31,6 +31,8 @@ namespace StockIt.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpClient<ILocationDataService, LocationDataService>();
+            services.AddHttpClient<IProductDataService, ProductDataService>();
+            services.AddHttpClient<ITenantDataService, TenantDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

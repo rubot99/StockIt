@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using StockIt.Core.Repositories.Tenant;
+using StockIt.Web.Common;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -22,9 +24,18 @@ namespace StockIt.Web.Data
             throw new NotImplementedException();
         }
 
-        public Task<List<Tenant>> GetAllAsync(string tenant)
+        public async Task<List<Tenant>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Get, ConstantsClass.Url + "/" + "tenant");
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+            var tenants = new List<Tenant>();
+
+            if (response.IsSuccessStatusCode)
+            {
+                tenants = JsonConvert.DeserializeObject<List<Tenant>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            }
+
+            return tenants;
         }
     }
 }

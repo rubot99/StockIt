@@ -12,6 +12,8 @@ namespace StockIt.Core.Repositories.Location
         {
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
+                t.Id = null;
+
                 session.Store(t);
 
                 session.SaveChanges();
@@ -27,14 +29,23 @@ namespace StockIt.Core.Repositories.Location
 
         public Location Get(string id, string tenant)
         {
-            throw new NotImplementedException();
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                var query = session.Query<Location>()
+                    .Where(x => x.Id.Equals(id, StringComparison.OrdinalIgnoreCase)
+                    && x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase));
+
+                return query.FirstOrDefault();
+            }
         }
 
         public List<Location> GetAll(string tenant)
         {
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
-                return session.Query<Location>().ToList();
+                return session.Query<Location>()
+                    .Where(x => x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
             }
         }
 

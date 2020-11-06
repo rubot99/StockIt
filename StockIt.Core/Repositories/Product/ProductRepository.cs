@@ -1,5 +1,6 @@
 ﻿using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace StockIt.Core.Repositories.Product
         {
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
+                t.Id = null;
+
                 session.Store(t);
 
                 session.SaveChanges();
@@ -30,7 +33,8 @@ namespace StockIt.Core.Repositories.Product
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
                 var query = session.Query<Product>()
-                    .Where(x => x.Id == id);
+                    .Where(x => x.Id.Equals(id, StringComparison.OrdinalIgnoreCase)
+                    && x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase));
 
                 return query.FirstOrDefault();
             }
@@ -38,7 +42,12 @@ namespace StockIt.Core.Repositories.Product
 
         public List<Product> GetAll(string tenant)
         {
-            throw new System.NotImplementedException();
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                return session.Query<Product>()
+                    .Where(x => x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
         }
 
         public List<Product> SearchByCategory(string category)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StockIt.Core.Repositories;
 using StockIt.Core.Repositories.Product;
+using StockIt.Web.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +13,12 @@ namespace StockIt.Web.Pages
     { 
         protected List<Product> products;
 
+        [Inject]
+        public IProductDataService productDataService { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
-            products = new List<Product>
-            {
-                new Product
-                {
-                    Id = "kkk"
-                },
-                new Product
-                {
-                    Id = "kkkikpkpo"
-                }
-            };
+            products = await productDataService.GetAllAsync("new").ConfigureAwait(false);
         }
     }
 }

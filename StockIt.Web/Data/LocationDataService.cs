@@ -27,7 +27,7 @@ namespace StockIt.Web.Data
 
         public async Task<List<Location>> GetAllAsync(string tenant)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, ConstantsClass.Url + "/" + "location/tenant/new");
+            var request = new HttpRequestMessage(HttpMethod.Get, ConstantsClass.Url + "/" + $"location/tenant/{tenant}");
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             var locations = new List<Location>();
 

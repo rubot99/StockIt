@@ -9,6 +9,5 @@ namespace StockIt.Core.Repositories
         public bool Enabled { get; set; } = true;
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public DateTime Updated { get; set; } = DateTime.UtcNow;
-        public string Tenant { get; set; }
     }
 }

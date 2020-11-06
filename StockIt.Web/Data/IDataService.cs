@@ -6,7 +6,5 @@ namespace StockIt.Web.Data
     public interface IDataService<T>
     {
         Task<T> AddAsync(T t);
-
-        Task<List<T>> GetAllAsync(string tenant);
     }
 }
