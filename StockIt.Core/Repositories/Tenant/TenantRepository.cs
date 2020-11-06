@@ -11,7 +11,7 @@ namespace StockIt.Core.Repositories.Tenant
         {
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
-                t.Id = null;
+                t.Id = string.Empty;
 
                 session.Store(t);
 

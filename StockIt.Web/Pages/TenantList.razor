@@ -37,7 +37,7 @@ else
                                     <i class="fas fa-pen"></i>
                                 </td>
                                 <td>
-                                    <i class="fas fa-trash"></i>
+                                    <button type="button" class="btn btn-info" @onclick="() => DeleteItem(tenant.Id)"><i class="fas fa-trash"></i></button> 
                                 </td>
                             </tr>
                         }

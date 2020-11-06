@@ -20,5 +20,9 @@ namespace StockIt.Web.Pages
         {
             products = await productDataService.GetAllAsync("new").ConfigureAwait(false);
         }
+        protected async Task DeleteItem(string id)
+        {
+            await productDataService.DeleteAsync(id);
+        }
     }
 }

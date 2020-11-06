@@ -14,12 +14,12 @@ namespace StockIt.Web.Data
     public class LocationDataService : ILocationDataService
     {
         private readonly HttpClient httpClient;
-        private readonly Url url;
+        private readonly string url;
 
         public LocationDataService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
-            this.url = new Url($"{ConstantsClass.Url}/location");
+            this.url = $"{ConstantsClass.Url}/location";
         }
 
         public Task<Location> AddAsync(Location t)
@@ -29,7 +29,7 @@ namespace StockIt.Web.Data
 
         public async Task<bool> DeleteAsync(string id)
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"{url.ToString()}/id/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"{url}/id/{id}");
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
 
             return response.IsSuccessStatusCode;
@@ -37,7 +37,7 @@ namespace StockIt.Web.Data
 
         public async Task<List<Location>> GetAllAsync(string tenant)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{url.ToString()}/tenant/{tenant}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/tenant/{tenant}");
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             var locations = new List<Location>();
 

@@ -14,12 +14,12 @@ namespace StockIt.Web.Data
     public class TenantDataService : ITenantDataService
     {
         private readonly HttpClient httpClient;
-        private readonly Url url;
+        private readonly string url;
         
         public TenantDataService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
-            this.url = new Url($"{ConstantsClass.Url}/tenant");
+            this.url = $"{ConstantsClass.Url}/tenant";
         }
 
         public Task<Tenant> AddAsync(Tenant t)
@@ -29,7 +29,7 @@ namespace StockIt.Web.Data
 
         public async Task<bool> DeleteAsync(string id)
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"{url.ToString()}/id/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"{url}/id/{id}");
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
 
             return response.IsSuccessStatusCode;
@@ -37,7 +37,7 @@ namespace StockIt.Web.Data
 
         public async Task<List<Tenant>> GetAllAsync()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, url.ToString());
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             var tenants = new List<Tenant>();
 

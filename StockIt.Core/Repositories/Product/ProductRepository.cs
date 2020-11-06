@@ -13,7 +13,7 @@ namespace StockIt.Core.Repositories.Product
         {
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
-                t.Id = null;
+                t.Id = string.Empty;
 
                 session.Store(t);
 

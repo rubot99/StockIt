@@ -3,6 +3,7 @@ using StockIt.Core.Repositories.Tenant;
 using StockIt.Web.Data;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +19,11 @@ namespace StockIt.Web.Pages
         protected override async Task OnInitializedAsync()
         {
             tenants = await tenantDataService.GetAllAsync().ConfigureAwait(false);
+        }
+
+        protected async Task DeleteItem(string id)
+        {
+            await tenantDataService.DeleteAsync(id);
         }
     }
 }

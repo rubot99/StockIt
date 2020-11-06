@@ -19,5 +19,9 @@ namespace StockIt.Web.Pages
         {
             locations = await locationDataService.GetAllAsync("new").ConfigureAwait(false);
         }
+        protected async Task DeleteItem(string id)
+        {
+            await locationDataService.DeleteAsync(id);
+        }
     }
 }
