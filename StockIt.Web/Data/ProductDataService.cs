@@ -66,5 +66,10 @@ namespace StockIt.Web.Data
 
             return product;
         }
+
+        public Task<bool> UpdateAsync(Product t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
