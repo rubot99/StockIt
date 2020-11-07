@@ -68,5 +68,14 @@ namespace StockIt.Web.Data
 
             return location;
         }
+
+        public async Task<bool> UpdateAsync(Location t)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Put, $"{url}");
+            request.Content = new StringContent(JsonConvert.SerializeObject(t), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

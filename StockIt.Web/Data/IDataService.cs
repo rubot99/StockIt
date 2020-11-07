@@ -7,5 +7,6 @@ namespace StockIt.Web.Data
     {
         Task<T> AddAsync(T t);
         Task<bool> DeleteAsync(string id);
+        Task<bool> UpdateAsync(T t);
     }
 }

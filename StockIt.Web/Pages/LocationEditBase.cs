@@ -42,7 +42,7 @@ namespace StockIt.Web.Pages
             }
             else
             {
-                
+                LocationDataService.
             }
         }
     }
