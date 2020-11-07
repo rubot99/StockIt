@@ -16,13 +16,25 @@ namespace StockIt.Web.Pages
         [Inject]
         public IProductDataService productDataService { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
-            products = await productDataService.GetAllAsync("new").ConfigureAwait(false);
+            products = await productDataService.GetAllAsync("rrhome").ConfigureAwait(false);
         }
         protected async Task DeleteItem(string id)
         {
             await productDataService.DeleteAsync(id);
         }
+        protected async Task EditItem(string id)
+        {
+            NavigationManager.NavigateTo($"product/{id}");
+        }
+        protected async Task AddItem()
+        {
+            NavigationManager.NavigateTo($"product");
+        }
+
     }
 }

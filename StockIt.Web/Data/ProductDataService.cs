@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Policy;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace StockIt.Web.Data
@@ -20,9 +21,14 @@ namespace StockIt.Web.Data
             this.url = $"{ConstantsClass.Url}/product";
         }
 
-        public Task<Product> AddAsync(Product t)
+        public async Task<Product> AddAsync(Product t)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{url}");
+            request.Content = new StringContent(JsonConvert.SerializeObject(t), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+
+            return t;
         }
 
         public async Task<bool> DeleteAsync(string id)
@@ -47,12 +53,18 @@ namespace StockIt.Web.Data
             return locations;
         }
 
-        Task<bool> IDataService<Product>.DeleteAsync(string id)
+        public async Task<Product> GetAsync(string id, string tenant)
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"{url}/id/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/id/{id}/tenant/{tenant}");
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+            var product = new Product();
 
-            return response.IsSuccessStatusCode;
+            if (response.IsSuccessStatusCode)
+            {
+                product = JsonConvert.DeserializeObject<Product>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            }
+
+            return product;
         }
     }
 }

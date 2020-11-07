@@ -37,6 +37,13 @@ namespace StockIt.Api.Controllers.v1
             return Ok(locations);
         }
 
+        [HttpGet("id/{id}/tenant/{tenant}")]
+        public IActionResult GetAll([FromRoute] string id, [FromRoute] string tenant)
+        {
+            var location = locationRepository.Get(id, tenant);
+            return Ok(location);
+        }
+
         [HttpDelete("id/{id}")]
         public IActionResult Delete(string id)
         {

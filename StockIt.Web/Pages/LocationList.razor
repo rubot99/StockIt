@@ -1,7 +1,7 @@
 ﻿@page "/locations"
 @inherits LocationListBase
 
-<h3>LocationList</h3>
+<h3>Locations</h3>
 
 @if (locations == null)
 {
@@ -12,7 +12,7 @@ else
     <div class="container">
         <div class="row">
             <div class="col">
-                <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus-circle"></i></button>
+                <button type="button" class="btn btn-primary float-right" @onclick="() => AddItem()"><i class="fas fa-plus-circle"></i></button>
             </div>
         </div>
         <div class="row">&nbsp;</div>
@@ -21,7 +21,6 @@ else
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Name</th>
                             <th></th>
                             <th></th>
@@ -31,13 +30,12 @@ else
                         @foreach (var location in locations)
                         {
                             <tr>
-                                <td>@location.Id</td>
                                 <td>@location.Name</td>
                                 <td>
-                                    <i class="fas fa-pen"></i>
+                                    <button type="button" class="btn btn-primary" @onclick="() => EditItem(location.Id)"><i class="fas fa-pen"></i></button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-info" @onclick="() => DeleteItem(location.Id)"><i class="fas fa-trash"></i></button>
+                                    <button type="button" class="btn btn-primary" @onclick="() => DeleteItem(location.Id)"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                         }

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Policy;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace StockIt.Web.Data
@@ -22,9 +23,14 @@ namespace StockIt.Web.Data
             this.url = $"{ConstantsClass.Url}/location";
         }
 
-        public Task<Location> AddAsync(Location t)
+        public async Task<Location> AddAsync(Location t)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{url}");
+            request.Content = new StringContent(JsonConvert.SerializeObject(t), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+
+            return t;
         }
 
         public async Task<bool> DeleteAsync(string id)
@@ -47,6 +53,20 @@ namespace StockIt.Web.Data
             }
 
             return locations;
+        }
+
+        public async Task<Location> GetAsync(string id, string tenant)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/id/{id}/tenant/{tenant}");
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+            var location = new Location();
+
+            if (response.IsSuccessStatusCode)
+            {
+                location = JsonConvert.DeserializeObject<Location>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            }
+
+            return location;
         }
     }
 }

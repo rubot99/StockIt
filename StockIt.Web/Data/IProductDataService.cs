@@ -7,5 +7,7 @@ namespace StockIt.Web.Data
     public interface IProductDataService : IDataService<Product>
     { 
         Task<List<Product>> GetAllAsync(string tenant);
+
+        Task<Product> GetAsync(string id, string tenant);
     }
 }

@@ -13,15 +13,26 @@ namespace StockIt.Web.Pages
         protected List<Location> locations;
 
         [Inject]
-        public ILocationDataService locationDataService { get; set; }
+        public ILocationDataService LocationDataService { get; set; }
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            locations = await locationDataService.GetAllAsync("new").ConfigureAwait(false);
+            locations = await LocationDataService.GetAllAsync("rrhome").ConfigureAwait(false);
         }
         protected async Task DeleteItem(string id)
         {
-            await locationDataService.DeleteAsync(id);
+            await LocationDataService.DeleteAsync(id);
+        }
+        protected async Task EditItem(string id)
+        {
+            NavigationManager.NavigateTo($"location/{id}");
+        }
+        protected async Task AddItem()
+        {
+            NavigationManager.NavigateTo($"location");
         }
     }
 }
