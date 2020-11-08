@@ -19,6 +19,7 @@ namespace StockIt.Web.Pages
         [Parameter]
         public string ProductId { get; set; }
         public string Message { get; set; }
+        public string Tags { get; set; }
 
         public Product Product { get; set; } = new Product();
 
@@ -33,14 +34,17 @@ namespace StockIt.Web.Pages
             else
             {
                 Product = await ProductDataService.GetAsync(Product.Id, "rrhome");
+                Tags = string.Join(',', Product.Tags);
             }
 
         }
 
         protected async Task HandleValidSubmit()
         {
+            Product.Tags = Tags.Split(',').ToList<string>();
+
             if (string.IsNullOrEmpty(Product.Id))
-            {
+            {                
                 await ProductDataService.AddAsync(Product);
             }
             else

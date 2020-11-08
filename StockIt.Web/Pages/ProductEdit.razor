@@ -20,7 +20,44 @@
             <label for="Description" class="col-sm-3">Description: </label>
             <InputTextArea id="Description" class="form-control col-sm-8" @bind-Value="@Product.Description" placeholder="Enter Description"></InputTextArea>
         </div>
-        @*<div class="form-group row">
+        <div class="form-group row">
+            <label for="Tags" class="col-sm-3">Tags: </label>
+            <InputTextArea id="Tags" class="form-control col-sm-8" @bind-Value="@Tags" placeholder="Enter Tags"></InputTextArea>
+        </div>
+        <div class="form-group row">
+            <hr />
+        </div>
+        <div class="form-group row">
+            <div class="col"></div></div>
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Location</th>
+                            <th>Location</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var location in locations)
+                        {
+                            <tr>
+                                <td>@location.Name</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" @onclick="() => EditItem(location.Id)"><i class="fas fa-pen"></i></button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" @onclick="() => DeleteItem(location.Id)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            @*<div class="form-group row">
             <label for="Description" class="col-sm-3">Amount: </label>
             <InputNumber id="Description" class="form-control col-sm-8" @bind-Value="@Expense.Amount" placeholder="Enter Description"></InputNumber>
         </div>
@@ -55,6 +92,6 @@
             </InputSelect>
         </div>*@
 
-        <button type="submit" class="btn btn-primary edit-btn">Save Location</button>
-    </EditForm>
+            <button type="submit" class="btn btn-primary edit-btn">Save Product</button>
+</EditForm>
 </div>
