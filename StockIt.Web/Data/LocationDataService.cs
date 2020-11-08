@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using StockIt.Core.Repositories.Location;
@@ -17,10 +18,14 @@ namespace StockIt.Web.Data
         private readonly HttpClient httpClient;
         private readonly string url;
 
-        public LocationDataService(HttpClient httpClient)
+        public LocationDataService(HttpClient httpClient, IOptions<StockApiConfig> stockApiConfig)
         {
             this.httpClient = httpClient;
-            this.url = $"{ConstantsClass.Url}/location";
+
+            if (stockApiConfig.Value != null)
+            {
+                this.url = $"{stockApiConfig.Value?.Url}/location";
+            }
         }
 
         public async Task<Location> AddAsync(Location t)

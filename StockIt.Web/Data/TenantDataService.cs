@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using StockIt.Core.Repositories.Tenant;
 using StockIt.Web.Common;
@@ -16,10 +17,14 @@ namespace StockIt.Web.Data
         private readonly HttpClient httpClient;
         private readonly string url;
         
-        public TenantDataService(HttpClient httpClient)
+        public TenantDataService(HttpClient httpClient, IOptions<StockApiConfig> stockApiConfig)
         {
             this.httpClient = httpClient;
-            this.url = $"{ConstantsClass.Url}/tenant";
+
+            if (stockApiConfig.Value != null)
+            {
+                this.url = $"{stockApiConfig.Value?.Url}/location";
+            }
         }
 
         public Task<Tenant> AddAsync(Tenant t)
@@ -47,6 +52,11 @@ namespace StockIt.Web.Data
             }
 
             return tenants;
+        }
+
+        public Task<bool> UpdateAsync(Tenant t)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using StockIt.Core.Repositories.Product;
 using StockIt.Web.Common;
 using System;
@@ -15,10 +16,14 @@ namespace StockIt.Web.Data
         private readonly HttpClient httpClient;
         private readonly string url;
 
-        public ProductDataService(HttpClient httpClient)
+        public ProductDataService(HttpClient httpClient, IOptions<StockApiConfig> stockApiConfig)
         {
             this.httpClient = httpClient;
-            this.url = $"{ConstantsClass.Url}/product";
+
+            if (stockApiConfig.Value != null)
+            {
+                this.url = $"{stockApiConfig.Value?.Url}/location";
+            }
         }
 
         public async Task<Product> AddAsync(Product t)
