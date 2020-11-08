@@ -13,6 +13,9 @@ namespace StockIt.Web.Pages
         [Inject]
         public ILocationDataService LocationDataService { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         [Parameter]
         public string LocationId { get; set; }
         public string Message { get; set; }
@@ -31,7 +34,6 @@ namespace StockIt.Web.Pages
             {
                 Location = await LocationDataService.GetAsync(LocationId, "rrhome");
             }
-
         }
 
         protected async Task HandleValidSubmit()
@@ -44,6 +46,8 @@ namespace StockIt.Web.Pages
             {
                 await LocationDataService.UpdateAsync(Location);
             }
+
+            NavigationManager.NavigateTo("/locations");
         }
     }
 }

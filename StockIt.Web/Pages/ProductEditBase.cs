@@ -13,6 +13,9 @@ namespace StockIt.Web.Pages
         [Inject]
         public IProductDataService ProductDataService { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         [Parameter]
         public string ProductId { get; set; }
         public string Message { get; set; }
@@ -44,6 +47,8 @@ namespace StockIt.Web.Pages
             {
 
             }
+
+            NavigationManager.NavigateTo("/product");
         }
     }
 }
