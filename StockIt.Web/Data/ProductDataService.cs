@@ -22,7 +22,7 @@ namespace StockIt.Web.Data
 
             if (stockApiConfig.Value != null)
             {
-                this.url = $"{stockApiConfig.Value?.Url}/location";
+                this.url = $"{stockApiConfig.Value?.Url}/product";
             }
         }
 
