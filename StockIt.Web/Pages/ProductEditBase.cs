@@ -21,7 +21,11 @@ namespace StockIt.Web.Pages
         public string Message { get; set; }
         public string Tags { get; set; }
 
+        public double ProductQuantity { get; set; }
+        public string LocationName { get; set; }
+
         public Product Product { get; set; } = new Product();
+        public List<StoredItem> StoredItems { get; set; } = new List<StoredItem>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -37,6 +41,21 @@ namespace StockIt.Web.Pages
                 Tags = string.Join(',', Product.Tags);
             }
 
+            StoredItems.Add(new StoredItem
+            {
+                LocationId = "234234",
+                Location = "Garage",
+                Quantity = 20,
+                Updated = DateTime.Now
+            });
+
+            StoredItems.Add(new StoredItem
+            {
+                LocationId = "435",
+                Location = "House",
+                Quantity = 43,
+                Updated = DateTime.Now
+            });
         }
 
         protected async Task HandleValidSubmit()
@@ -53,6 +72,18 @@ namespace StockIt.Web.Pages
             }
 
             NavigationManager.NavigateTo("/product");
+        }
+
+        protected async Task AddStoreItem()
+        {
+            StoredItems.Add(new StoredItem
+            {
+                Location = LocationName,
+                Quantity = ProductQuantity
+            });
+
+            LocationName = string.Empty;
+            ProductQuantity = 0;
         }
     }
 }

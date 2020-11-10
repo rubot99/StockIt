@@ -21,6 +21,10 @@
             <InputTextArea id="Description" class="form-control col-sm-8" @bind-Value="@Product.Description" placeholder="Enter Description"></InputTextArea>
         </div>
         <div class="form-group row">
+            <label for="AlertQuantity" class="col-sm-3">Alert Quantity: </label>
+            <InputNumber id="AlertQuantity" class="form-control col-sm-8" @bind-Value="@Product.AlertQuantity" placeholder="Enter Alert Quantity"></InputNumber>
+        </div>
+        <div class="form-group row">
             <label for="Tags" class="col-sm-3">Tags: </label>
             <InputTextArea id="Tags" class="form-control col-sm-8" @bind-Value="@Tags" placeholder="Enter Tags"></InputTextArea>
         </div>
@@ -28,36 +32,46 @@
             <hr />
         </div>
         <div class="form-group row">
-            <div class="col"></div></div>
-            <div class="col">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Location</th>
-                            <th>Location</th>
-                            <th>Location</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var location in locations)
-                        {
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <table class="table">                            
                             <tr>
-                                <td>@location.Name</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" @onclick="() => EditItem(location.Id)"><i class="fas fa-pen"></i></button>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" @onclick="() => DeleteItem(location.Id)"><i class="fas fa-trash"></i></button>
-                                </td>
+                                <td><InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@LocationName" placeholder="Enter Location"></InputText></td>
+                                <td><InputNumber id="AlertQuantity" class="form-control col-sm-8" @bind-Value="@ProductQuantity" placeholder="Enter Quantity"></InputNumber></td>
+                                <td><button type="button" class="btn btn-primary" @onclick="() => AddStoreItem()"><i class="fas fa-plus"></i></button></td>
                             </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Location</th>
+                                    <th>Quantity</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var storedItem in StoredItems)
+                            {
+                                <tr>
+                                    <td>@storedItem.Location</td>
+                                    <td>@storedItem.Quantity.ToString()</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>            
         </div>
-            @*<div class="form-group row">
+        @*<div class="form-group row">
             <label for="Description" class="col-sm-3">Amount: </label>
             <InputNumber id="Description" class="form-control col-sm-8" @bind-Value="@Expense.Amount" placeholder="Enter Description"></InputNumber>
         </div>
@@ -92,6 +106,6 @@
             </InputSelect>
         </div>*@
 
-            <button type="submit" class="btn btn-primary edit-btn">Save Product</button>
-</EditForm>
+        <button type="submit" class="btn btn-primary edit-btn">Save Product</button>
+    </EditForm>
 </div>
