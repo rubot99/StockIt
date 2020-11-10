@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using StockIt.Core.Repositories.Location;
 using StockIt.Core.Repositories.Product;
 using StockIt.Web.Data;
 using System;
@@ -24,8 +25,8 @@ namespace StockIt.Web.Pages
         public double ProductQuantity { get; set; }
         public string LocationName { get; set; }
 
-        public Product Product { get; set; } = new Product();
-        public List<StoredItem> StoredItems { get; set; } = new List<StoredItem>();
+        public Product ProductItem { get; set; } = new Product();
+        public List<Location> Locations { get; set; } = new List<Location>();
 
         protected override async Task OnInitializedAsync()
         {
@@ -33,15 +34,15 @@ namespace StockIt.Web.Pages
             if (string.IsNullOrEmpty(ProductId)) //new employee is being created
             {
                 //add some defaults
-                Product = new Product { Id = string.Empty, Tenant = "rrhome" };
+                ProductItem = new Product { Id = string.Empty, Tenant = "rrhome" };
             }
             else
             {
-                Product = await ProductDataService.GetAsync(Product.Id, "rrhome");
-                Tags = string.Join(',', Product.Tags);
+                ProductItem = await ProductDataService.GetAsync(ProductItem.Id, "rrhome");
+                Tags = string.Join(',', ProductItem.Tags);
             }
 
-            StoredItems.Add(new StoredItem
+            ProductItem.StoreItems.Add(new StoreItem
             {
                 LocationId = "234234",
                 Location = "Garage",
@@ -49,22 +50,34 @@ namespace StockIt.Web.Pages
                 Updated = DateTime.Now
             });
 
-            StoredItems.Add(new StoredItem
+            ProductItem.StoreItems.Add(new StoreItem
             {
                 LocationId = "435",
                 Location = "House",
                 Quantity = 43,
                 Updated = DateTime.Now
             });
+
+            Locations.Add(new Location
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "House"
+            });
+
+            Locations.Add(new Location
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Garage"
+            });
         }
 
         protected async Task HandleValidSubmit()
         {
-            Product.Tags = Tags.Split(',').ToList<string>();
+            ProductItem.Tags = Tags.Split(',').ToList<string>();
 
-            if (string.IsNullOrEmpty(Product.Id))
+            if (string.IsNullOrEmpty(ProductItem.Id))
             {                
-                await ProductDataService.AddAsync(Product);
+                await ProductDataService.AddAsync(ProductItem);
             }
             else
             {
@@ -76,14 +89,19 @@ namespace StockIt.Web.Pages
 
         protected async Task AddStoreItem()
         {
-            StoredItems.Add(new StoredItem
-            {
-                Location = LocationName,
-                Quantity = ProductQuantity
-            });
+            ProductItem.StoreItems.Add(
+                new StoreItem
+                {
+                    Location = LocationName,
+                    Quantity = ProductQuantity
+                });
 
             LocationName = string.Empty;
             ProductQuantity = 0;
+        }
+
+        protected async Task DeleteStoreItem()
+        {
         }
     }
 }

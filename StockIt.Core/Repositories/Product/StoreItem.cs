@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StockIt.Core.Repositories.Product
 {
-    public class StoredItem
+    public class StoreItem
     {
         public string LocationId { get; set; }
         public string Location { get; set; }

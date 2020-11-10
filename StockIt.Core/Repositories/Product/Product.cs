@@ -10,7 +10,7 @@ namespace StockIt.Core.Repositories.Product
         public string Description { get; set; }
         public double AlertQuantity { get; set; }
         public double TotalQuantity { get; set; }
-        public List<StoredItem> StoredItems { get; set; } = new List<StoredItem>();
+        public List<StoreItem> StoreItems { get; set; } = new List<StoreItem>();
         public List<string> Tags { get; set; } = new List<string>();
     }
 }
