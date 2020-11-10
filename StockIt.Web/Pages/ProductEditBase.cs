@@ -15,6 +15,9 @@ namespace StockIt.Web.Pages
         public IProductDataService ProductDataService { get; set; }
 
         [Inject]
+        public ILocationDataService LocationDataService { get; set; }
+
+        [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         [Parameter]
@@ -22,8 +25,9 @@ namespace StockIt.Web.Pages
         public string Message { get; set; }
         public string Tags { get; set; }
 
-        public double ProductQuantity { get; set; }
+        public double ProductQuantity { get; set; } = 1;
         public string LocationName { get; set; }
+        public string LocationId { get; set; }
 
         public Product ProductItem { get; set; } = new Product();
         public List<Location> Locations { get; set; } = new List<Location>();
@@ -42,33 +46,7 @@ namespace StockIt.Web.Pages
                 Tags = string.Join(',', ProductItem.Tags);
             }
 
-            ProductItem.StoreItems.Add(new StoreItem
-            {
-                LocationId = "234234",
-                Location = "Garage",
-                Quantity = 20,
-                Updated = DateTime.Now
-            });
-
-            ProductItem.StoreItems.Add(new StoreItem
-            {
-                LocationId = "435",
-                Location = "House",
-                Quantity = 43,
-                Updated = DateTime.Now
-            });
-
-            Locations.Add(new Location
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "House"
-            });
-
-            Locations.Add(new Location
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Garage"
-            });
+            Locations = await LocationDataService.GetAllAsync("rrhome");
         }
 
         protected async Task HandleValidSubmit()
@@ -81,27 +59,40 @@ namespace StockIt.Web.Pages
             }
             else
             {
-
+                await ProductDataService.UpdateAsync(ProductItem);
             }
 
             NavigationManager.NavigateTo("/product");
         }
 
-        protected async Task AddStoreItem()
+        protected async Task AddStoreItem(string locationId, double productQuantity)
         {
-            ProductItem.StoreItems.Add(
-                new StoreItem
-                {
-                    Location = LocationName,
-                    Quantity = ProductQuantity
-                });
+            var location = Locations.FirstOrDefault<Location>(x => x.Id.Equals(locationId, StringComparison.OrdinalIgnoreCase));
 
-            LocationName = string.Empty;
-            ProductQuantity = 0;
+            if(location != null)
+            {
+                if (!ProductItem.StoreItems.Exists(x => x.LocationId.Equals(location.Id, StringComparison.OrdinalIgnoreCase)))
+                {
+                    ProductItem.StoreItems.Add(
+                    new StoreItem
+                    {
+                        LocationId = location.Id,
+                        Location = location.Name,
+                        Quantity = ProductQuantity
+                    });
+                }
+            }
+            
+            LocationId = string.Empty;
+            ProductQuantity = 1;
         }
 
-        protected async Task DeleteStoreItem()
+        protected async Task DeleteStoreItem(string locationId)
         {
+            if (ProductItem.StoreItems.Exists(x => x.LocationId.Equals(locationId, StringComparison.OrdinalIgnoreCase)))
+            {
+                ProductItem.StoreItems.RemoveAll(x => x.LocationId.Equals(locationId, StringComparison.OrdinalIgnoreCase));
+            }
         }
     }
 }
