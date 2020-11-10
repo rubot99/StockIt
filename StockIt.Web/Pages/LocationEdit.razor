@@ -2,6 +2,8 @@
 @page "/location/{LocationId}"
 @inherits LocationEditBase
 
+@if (!saved)
+{
 <div class="entity-edit">
     <h1 class="page-title">Add New Location</h1>
 
@@ -54,3 +56,8 @@
         <button type="submit" class="btn btn-primary edit-btn">Save Location</button>
     </EditForm>
 </div>
+}
+else
+{
+    <div class="alert @statusClass">@message</div>
+}

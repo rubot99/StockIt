@@ -21,7 +21,6 @@ else
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Name</th>
                             <th></th>
                             <th></th>
@@ -30,16 +29,15 @@ else
                     <tbody>
                         @foreach (var product in products)
                         {
-                            <tr>
-                                <td>@product.Id</td>
-                                <td>@product.Name</td>
-                                <td>
-                                    <i class="fas fa-pen"></i>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-info" @onclick="() => DeleteItem(product.Id)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>@product.Name</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" @onclick="() => EditItem(product.Id)"><i class="fas fa-pen"></i></button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" @onclick="() => DeleteItem(product.Id)"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

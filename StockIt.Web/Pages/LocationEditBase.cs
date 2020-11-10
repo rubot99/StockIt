@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using StockIt.Core.Repositories.Location;
 using StockIt.Web.Data;
 using System;
@@ -20,11 +21,16 @@ namespace StockIt.Web.Pages
         public string LocationId { get; set; }
         public string Message { get; set; }
 
+        protected bool saved = false;
+        protected string message = string.Empty;
+        protected string statusClass = string.Empty;
+
         public Location Location { get; set; } = new Location();
 
         protected override async Task OnInitializedAsync()
         {
-            // Saved = false;
+            saved = false;
+
             if (string.IsNullOrEmpty(LocationId)) //new employee is being created
             {
                 //add some defaults
@@ -36,11 +42,32 @@ namespace StockIt.Web.Pages
             }
         }
 
-        protected async Task HandleValidSubmit()
+        protected async Task HandleInvalidSubmit()
         {
+            saved = false;
+            statusClass = "alert-danger";
+            message = "Bad Location added successfully";
+        }
+            protected async Task HandleValidSubmit()
+        {
+            saved = false;
+
             if(string.IsNullOrEmpty(Location.Id))
             {
-                await LocationDataService.AddAsync(Location);
+                var location = await LocationDataService.AddAsync(Location);
+
+                if (location != null)
+                {
+                    saved = true;
+                    statusClass = "alert-sucess";
+                    message = "Location added successfully";
+                }
+                else
+                {
+                    saved = false;
+                    statusClass = "alert-danger";
+                    message = "Location added successfully";
+                }
             }
             else
             {

@@ -62,7 +62,19 @@ namespace StockIt.Core.Repositories.Location
 
         public Location Update(Location t)
         {
-            throw new NotImplementedException();
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                var existingLocation = session.Load<Location>(t.Id);
+
+                if (existingLocation != null && existingLocation.Tenant.Equals(t.Tenant, StringComparison.OrdinalIgnoreCase))
+                {
+                    existingLocation.Name = t.Name;
+                    existingLocation.Updated = DateTime.Now;
+                    session.SaveChanges();
+                }
+
+                return t;
+            }
         }
 
         List<Location> ILocationRepository.SearchByName(string name)

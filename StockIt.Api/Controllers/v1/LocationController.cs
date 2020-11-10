@@ -30,6 +30,13 @@ namespace StockIt.Api.Controllers.v1
             return Ok(created.Id);
         }
 
+        [HttpPut]
+        public IActionResult Put([FromBody] Location location)
+        {
+            var created = locationRepository.Update(location);
+            return Ok(created.Id);
+        }
+
         [HttpGet("tenant/{tenant}")]
         public IActionResult GetAll([FromRoute] string tenant)
         {

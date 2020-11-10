@@ -25,13 +25,17 @@ namespace StockIt.Web.Pages
         protected async Task DeleteItem(string id)
         {
             await LocationDataService.DeleteAsync(id);
+            locations = await LocationDataService.GetAllAsync("rrhome").ConfigureAwait(false);
         }
+
         protected async Task EditItem(string id)
         {
+            locations = null;
             NavigationManager.NavigateTo($"location/{id}");
         }
         protected async Task AddItem()
         {
+            locations = null;
             NavigationManager.NavigateTo($"location");
         }
     }
