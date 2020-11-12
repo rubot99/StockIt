@@ -42,11 +42,15 @@ namespace StockIt.Web.Pages
             }
             else
             {
-                ProductItem = await ProductDataService.GetAsync(ProductItem.Id, "rrhome");
+                ProductItem = await ProductDataService.GetAsync(ProductId, "rrhome");
                 Tags = string.Join(',', ProductItem.Tags);
             }
 
             Locations = await LocationDataService.GetAllAsync("rrhome");
+            if (Locations.Count > 0)
+            {
+                LocationId = Locations[0].Id;
+            }
         }
 
         protected async Task HandleValidSubmit()
@@ -62,7 +66,7 @@ namespace StockIt.Web.Pages
                 await ProductDataService.UpdateAsync(ProductItem);
             }
 
-            NavigationManager.NavigateTo("/product");
+            NavigationManager.NavigateTo("/products");
         }
 
         protected async Task AddStoreItem(string locationId, double productQuantity)
@@ -78,7 +82,7 @@ namespace StockIt.Web.Pages
                     {
                         LocationId = location.Id,
                         Location = location.Name,
-                        Quantity = ProductQuantity
+                        Quantity = productQuantity
                     });
                 }
             }

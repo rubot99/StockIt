@@ -22,7 +22,8 @@ else
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th></th>
+                            <th>Barcode</th>
+                            <th>Tags</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -31,10 +32,11 @@ else
                         {
                         <tr>
                             <td>@product.Name</td>
+                            <td>@product.Barcode</td>
+                            <td>@string.Join(',',product.Tags)</td>
                             <td>
-                                <button type="button" class="btn btn-primary" @onclick="() => EditItem(product.Id)"><i class="fas fa-pen"></i></button>
-                            </td>
-                            <td>
+                                <button type="button" class="btn btn-primary float-left" @onclick="() => EditItem(product.Id)"><i class="fas fa-pen"></i></button>
+                                &nbsp;
                                 <button type="button" class="btn btn-primary" @onclick="() => DeleteItem(product.Id)"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>

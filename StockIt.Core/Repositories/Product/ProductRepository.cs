@@ -92,14 +92,26 @@ namespace StockIt.Core.Repositories.Product
         {
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
-                var query = session.Query<Product>()
-                    .Where(x => x.Id == t.Id);
+                var existingProduct = session.Load<Product>(t.Id);
 
-                var existingProduct = query.FirstOrDefault();
-
-                if (existingProduct == null)
+                if (existingProduct != null)
                 {
-                    existingProduct = t;
+                    existingProduct.Name = t.Name;
+                    existingProduct.StoreItems = t.StoreItems;
+                    existingProduct.Tags = t.Tags;
+                    existingProduct.Updated = DateTime.Now;
+                    existingProduct.AlertQuantity = t.AlertQuantity;
+                    existingProduct.Barcode = t.Barcode;
+                    existingProduct.Description = t.Description;
+
+                    double totalQuantity = 0;
+                    existingProduct.StoreItems.ForEach(x =>
+                    {
+                        totalQuantity = totalQuantity + x.Quantity;
+                    });
+
+                    existingProduct.TotalQuantity = totalQuantity;
+
                     session.SaveChanges();
 
                     return existingProduct;

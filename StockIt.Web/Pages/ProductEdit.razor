@@ -38,7 +38,7 @@
                         <table class="table">                            
                             <tr>
                                 <td>
-                                    <InputSelect id="expenseStatus" class="form-control col-sm-8" @bind-Value=@LocationId>
+                                    <InputSelect id="expenseStatus" class="form-control col-sm-8" @bind-Value="LocationId">
                                         @foreach (var location in Locations)
                                         {
                                             <option value="@(location.Id)">@location.Name</option>

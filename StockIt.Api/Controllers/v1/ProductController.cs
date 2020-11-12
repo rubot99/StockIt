@@ -38,10 +38,10 @@ namespace StockIt.Api.Controllers.v1
             return Ok(updated);
         }
 
-        [HttpGet("/name/{name}")]
-        public IActionResult Search([FromRoute] string name)
+        [HttpGet("id/{id}/tenant/{tenant}")]
+        public IActionResult Get([FromRoute] string id, [FromRoute] string tenant)
         {
-            var products = productRepository.SearchByName(name);
+            var products = productRepository.Get(id, tenant);
             return Ok(products);
         }
 

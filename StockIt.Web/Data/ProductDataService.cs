@@ -4,6 +4,7 @@ using StockIt.Core.Repositories.Product;
 using StockIt.Web.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Policy;
 using System.Text;
@@ -48,14 +49,14 @@ namespace StockIt.Web.Data
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/tenant/{tenant}");
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
-            var locations = new List<Product>();
+            var products = new List<Product>();
 
             if (response.IsSuccessStatusCode)
             {
-                locations = JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                products = JsonConvert.DeserializeObject<List<Product>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             }
 
-            return locations;
+            return products.OrderBy(x => x.Created).ToList();
         }
 
         public async Task<Product> GetAsync(string id, string tenant)
@@ -72,9 +73,14 @@ namespace StockIt.Web.Data
             return product;
         }
 
-        public Task<bool> UpdateAsync(Product t)
+        public async Task<bool> UpdateAsync(Product t)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Put, $"{url}");
+            request.Content = new StringContent(JsonConvert.SerializeObject(t), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+
+            return response.IsSuccessStatusCode;
         }
     }
 }

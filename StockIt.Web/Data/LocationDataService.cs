@@ -6,7 +6,9 @@ using StockIt.Core.Repositories.Location;
 using StockIt.Web.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +59,7 @@ namespace StockIt.Web.Data
                 locations = JsonConvert.DeserializeObject<List<Location>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             }
 
-            return locations;
+            return locations.OrderBy(x => x.Created).ToList();
         }
 
         public async Task<Location> GetAsync(string id, string tenant)
