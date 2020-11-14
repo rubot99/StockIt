@@ -1,0 +1,38 @@
+﻿@page "/stockit"
+@inherits StockItemBase
+
+<h3>Stock It</h3>
+
+@if (!saved)
+{
+    <div class="entity-edit">
+
+        <EditForm Model="@StockModel" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group row">
+                <InputSelect id="expenseStatus" class="form-control col-sm-8" @bind-Value="ActionType">
+                    @foreach (var item in Enum.GetNames(typeof(StockIt.Web.ViewModels.StockItActionType)))
+                        {
+                        <option value="@(item)">@item</option>
+                        }
+                </InputSelect>
+            </div>
+            <div class="form-group row">
+                <label for="Name" class="col-sm-3">Name: </label>
+                <InputText id="Name" class="form-control col-sm-8" @bind-Value="@Location.Name" placeholder="Enter Location"></InputText>
+            </div>
+
+            <div class="form-group row">
+                <label for="Description" class="col-sm-3">Description: </label>
+                <InputTextArea id="Description" class="form-control col-sm-8" @bind-Value="@Location.Description" placeholder="Enter Description"></InputTextArea>
+            </div>
+
+            <button type="submit" class="btn btn-primary edit-btn">Save Location</button>
+        </EditForm>
+    </div>
+}
+else
+{
+    <div class="alert @statusClass">@message</div>
+}
