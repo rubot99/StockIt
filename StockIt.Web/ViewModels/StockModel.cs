@@ -9,6 +9,4 @@ namespace StockIt.Web.ViewModels
     {
         public StockItActionType ActionType { get; set; }
     }
-
-    public enum StockItActionType { ToStock, FromtStock, MoveStock };
 }

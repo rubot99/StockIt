@@ -16,19 +16,27 @@
                         {
                         <option value="@(item)">@item</option>
                         }
+                    /**/
                 </InputSelect>
             </div>
-            <div class="form-group row">
-                <label for="Name" class="col-sm-3">Name: </label>
-                <InputText id="Name" class="form-control col-sm-8" @bind-Value="@Location.Name" placeholder="Enter Location"></InputText>
-            </div>
 
-            <div class="form-group row">
-                <label for="Description" class="col-sm-3">Description: </label>
-                <InputTextArea id="Description" class="form-control col-sm-8" @bind-Value="@Location.Description" placeholder="Enter Description"></InputTextArea>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                @foreach (var actionType in stockItActionTypes)
+                {
+                <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name)</button>
+                }
             </div>
+            @*<div class="form-group row">
+            <label for="Name" class="col-sm-3">Name: </label>
+            <InputText id="Name" class="form-control col-sm-8" @bind-Value="@Location.Name" placeholder="Enter Location"></InputText>
+        </div>
 
-            <button type="submit" class="btn btn-primary edit-btn">Save Location</button>
+        <div class="form-group row">
+            <label for="Description" class="col-sm-3">Description: </label>
+            <InputTextArea id="Description" class="form-control col-sm-8" @bind-Value="@Location.Description" placeholder="Enter Description"></InputTextArea>
+        </div>
+
+        <button type="submit" class="btn btn-primary edit-btn">Save Location</button>*@
         </EditForm>
     </div>
 }

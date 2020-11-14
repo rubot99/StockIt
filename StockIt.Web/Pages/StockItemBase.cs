@@ -13,13 +13,16 @@ namespace StockIt.Web.Pages
         protected bool saved = false;
         protected string message;
         protected string statusClass;
-
+        protected List<StockItActionType> stockItActionTypes = StockItActionTypeConstants.ActionTypes;
         public Location Location { get; set; }
         public string ActionType { get; set; }
-        public StockModel StockModel { get; set; }
+        public StockModel StockModel { get; set; } = new StockModel();
 
         protected async Task HandleValidSubmit()
         {
         }
+
+        protected async Task SetActionType(int actionId)
+        { }
     }
 }
