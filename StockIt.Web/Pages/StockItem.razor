@@ -5,40 +5,88 @@
 
 @if (!saved)
 {
-    <div class="entity-edit">
-
-        <EditForm Model="@StockModel" OnValidSubmit="@HandleValidSubmit">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
+    <EditForm Model="@stockModel" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="container">
             <div class="form-group row">
-                <InputSelect id="expenseStatus" class="form-control col-sm-8" @bind-Value="ActionType">
-                    @foreach (var item in Enum.GetNames(typeof(StockIt.Web.ViewModels.StockItActionType)))
+                <div class="col-sm">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        @foreach (var actionType in stockItActionTypes)
                         {
-                        <option value="@(item)">@item</option>
+                            <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name</button>
                         }
-                    /**/
-                </InputSelect>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm">
+                    <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
+                        <option value="">Select</option>
+                        @foreach (var location in Locations)
+                            {
+                            <option value="@location.Id">
+                                @location.Name
+                            </option>
+                            }
+                    </InputSelect>
+                </div>
+
+                <div class="col">
+                    <i class="fas fa-chevron-circle-right"></i>
+                </div>
+                    <div class="col-sm">
+                        <InputSelect id="LocationItem2" disabled="@isDisabled" class="form-control" @bind-Value="locationItem2">
+                            <option value="">Select</option>
+                            @foreach (var location in Locations)
+                                {
+                                <option value="@location.Id">
+                                    @location.Name
+                                </option>
+                                }
+                        </InputSelect>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm">
+                        <div class="form-group row">
+                            <label for="Barcode" class="col-sm-3">Barcode: </label>
+                            <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem(barcode)"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Barcode</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var barcode in stockModel.Barcodes)
+                                {
+                                    <tr>
+                                        <td>@barcode</td>
+                                        <td>
+                                            &nbsp;
+                                            <button type="button" class="btn btn-primary" @onclick="() => DeleteBarcodeItem(barcode)"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
-            <div class="btn-group" role="group" aria-label="Basic example">
-                @foreach (var actionType in stockItActionTypes)
-                {
-                <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name)</button>
-                }
-            </div>
-            @*<div class="form-group row">
-            <label for="Name" class="col-sm-3">Name: </label>
-            <InputText id="Name" class="form-control col-sm-8" @bind-Value="@Location.Name" placeholder="Enter Location"></InputText>
-        </div>
-
-        <div class="form-group row">
-            <label for="Description" class="col-sm-3">Description: </label>
-            <InputTextArea id="Description" class="form-control col-sm-8" @bind-Value="@Location.Description" placeholder="Enter Description"></InputTextArea>
-        </div>
-
-        <button type="submit" class="btn btn-primary edit-btn">Save Location</button>*@
-        </EditForm>
-    </div>
+        <button type="submit" class="btn btn-primary edit-btn">Save Location</button>
+</EditForm>
 }
 else
 {

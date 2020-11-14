@@ -12,8 +12,8 @@ namespace StockIt.Core.Repositories.Product
         [Required]
         public string Barcode { get; set; }
         public string Description { get; set; }
-        public double AlertQuantity { get; set; }
-        public double TotalQuantity { get; set; }
+        public decimal AlertQuantity { get; set; }
+        public decimal TotalQuantity { get; set; }
         public List<StoreItem> StoreItems { get; set; } = new List<StoreItem>();
         public List<string> Tags { get; set; } = new List<string>();
     }

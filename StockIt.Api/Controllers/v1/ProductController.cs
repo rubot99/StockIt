@@ -28,7 +28,6 @@ namespace StockIt.Api.Controllers.v1
         {
             var created = productRepository.Add(product);
             return Ok(created.Id);
-
         }
 
         [HttpPut]
@@ -42,6 +41,13 @@ namespace StockIt.Api.Controllers.v1
         public IActionResult Get([FromRoute] string id, [FromRoute] string tenant)
         {
             var products = productRepository.Get(id, tenant);
+            return Ok(products);
+        }
+
+        [HttpGet("barcode/{barcode}/tenant/{tenant}")]
+        public IActionResult GetBarcode([FromRoute] string barcode, [FromRoute] string tenant)
+        {
+            var products = productRepository.Get(barcode, tenant);
             return Ok(products);
         }
 

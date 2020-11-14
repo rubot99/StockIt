@@ -25,7 +25,7 @@ namespace StockIt.Web.Pages
         public string Message { get; set; }
         public string Tags { get; set; }
 
-        public double ProductQuantity { get; set; } = 1;
+        public decimal ProductQuantity { get; set; } = 1;
         public string LocationName { get; set; }
         public string LocationId { get; set; }
 
@@ -69,7 +69,7 @@ namespace StockIt.Web.Pages
             NavigationManager.NavigateTo("/products");
         }
 
-        protected async Task AddStoreItem(string locationId, double productQuantity)
+        protected async Task AddStoreItem(string locationId, decimal productQuantity)
         {
             var location = Locations.FirstOrDefault<Location>(x => x.Id.Equals(locationId, StringComparison.OrdinalIgnoreCase));
 

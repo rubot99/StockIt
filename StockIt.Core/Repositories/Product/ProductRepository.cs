@@ -56,6 +56,18 @@ namespace StockIt.Core.Repositories.Product
             }
         }
 
+        public Product GetBarcode(string barcode, string tenant)
+        {
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                var query = session.Query<Product>()
+                    .Where(x => x.Id.Equals(barcode, StringComparison.OrdinalIgnoreCase)
+                    && x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase));
+
+                return query.FirstOrDefault();
+            }
+        }
+
         public List<Product> SearchByCategory(string category)
         {
             throw new System.NotImplementedException();
@@ -104,7 +116,7 @@ namespace StockIt.Core.Repositories.Product
                     existingProduct.Barcode = t.Barcode;
                     existingProduct.Description = t.Description;
 
-                    double totalQuantity = 0;
+                    decimal totalQuantity = 0;
                     existingProduct.StoreItems.ForEach(x =>
                     {
                         totalQuantity = totalQuantity + x.Quantity;

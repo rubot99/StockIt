@@ -2,7 +2,7 @@
 
 namespace StockIt.Web.ViewModels
 {
-    public static class StockItActionTypeConstants
+    public static class StockItConstants
     {
         public static List<StockItActionType> ActionTypes = new List<StockItActionType>
         {

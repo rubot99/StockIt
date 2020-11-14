@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using StockIt.Core.Repositories.Product;
 using StockIt.Web.Common;
+using StockIt.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,6 +74,20 @@ namespace StockIt.Web.Data
             return product;
         }
 
+        public async Task<Product> GetBarcodeAsync(string barcode, string tenant)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/barcode/{barcode}/tenant/{tenant}");
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+            var product = new Product();
+
+            if (response.IsSuccessStatusCode)
+            {
+                product = JsonConvert.DeserializeObject<Product>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            }
+
+            return product;
+        }
+
         public async Task<bool> UpdateAsync(Product t)
         {
             var request = new HttpRequestMessage(HttpMethod.Put, $"{url}");
@@ -81,6 +96,34 @@ namespace StockIt.Web.Data
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
 
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> UpdateStockAsync(List<ProductStock> productStocks, string tenant)
+        {
+            var result = false;
+
+            foreach (var productStock in productStocks)
+            {
+                var product = await GetBarcodeAsync(productStock.Barcode, tenant);
+
+                productStock.RemoveItems.ForEach(x => {
+                    var storeItem = product.StoreItems.FirstOrDefault(y => y.LocationId.Equals(x.LocationId, StringComparison.OrdinalIgnoreCase));
+                    if(storeItem != null)
+                    {
+                        storeItem.Quantity = storeItem.Quantity - x.Quantity;
+                    }
+                });
+
+                productStock.AddItems.ForEach(x => {
+                    var storeItem = product.StoreItems.FirstOrDefault(y => y.LocationId.Equals(x.LocationId, StringComparison.OrdinalIgnoreCase));
+                    if (storeItem != null)
+                    {
+                        storeItem.Quantity = storeItem.Quantity + x.Quantity;
+                    }
+                });
+            }
+
+            return result;
         }
     }
 }
