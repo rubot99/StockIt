@@ -55,7 +55,10 @@ namespace StockIt.Web.Pages
 
         protected async Task HandleValidSubmit()
         {
-            ProductItem.Tags = Tags.Split(',').ToList<string>();
+            if (!string.IsNullOrEmpty(Tags))
+            {
+                ProductItem.Tags = Tags.Split(',').ToList<string>();
+            }
 
             if (string.IsNullOrEmpty(ProductItem.Id))
             {                

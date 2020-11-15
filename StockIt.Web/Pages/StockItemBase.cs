@@ -63,7 +63,7 @@ namespace StockIt.Web.Pages
 
                     product.AddItems.Add(new ProductLocation
                     {
-                        LocationId = locationItem1,
+                        LocationId = stockModel.Location1.Id,
                         Quantity = total
                     });
 
@@ -107,10 +107,7 @@ namespace StockIt.Web.Pages
         {
             if (!string.IsNullOrEmpty(barcode))
             {
-                if (!stockModel.Barcodes.Exists(x => x.Equals(barcode, StringComparison.OrdinalIgnoreCase)))
-                {
-                    stockModel.Barcodes.Add(barcode);
-                }
+                stockModel.Barcodes.Add(barcode);
             }
         }
     }
