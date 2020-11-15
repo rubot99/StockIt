@@ -48,7 +48,16 @@
             <div class="col">&nbsp;</div>
         </div>
         <div class="row">
-            <div class="col"></div>
+            <div class="col">
+            <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
+    <option value="">Select</option>
+    @foreach (var location in Locations)
+    {
+        <option value="@location.Id">
+            @location.Name
+        </option>
+    }
+</InputSelect></div>
             <div class="col"></div>
         </div>
         <div class="row">

@@ -36,6 +36,17 @@ namespace StockIt.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            Locations = new List<Location>
+            {
+                new Location
+                {
+                    Name = "hh"
+                },
+                new Location
+                {
+                    Name = "gg"
+                }
+            };
             ///Locations = await LocationDataService.GetAllAsync("rrhome");
         }
 
