@@ -19,6 +19,8 @@ namespace StockIt.Web.Pages
         [Inject]
         public ILocationDataService LocationDataService { get; set; }
 
+        protected List<ProductStockItem> productStockItems = new List<ProductStockItem>();
+
         public string locationItem1;
         public string locationItem2;
         protected bool saved = false;
@@ -33,7 +35,7 @@ namespace StockIt.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Locations = await LocationDataService.GetAllAsync("rrhome");
+            ///Locations = await LocationDataService.GetAllAsync("rrhome");
         }
 
         protected async Task HandleValidSubmit()

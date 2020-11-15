@@ -15,6 +15,12 @@ namespace StockIt.Web.ViewModels
         public List<string> Barcodes { get; set; } = new List<string>();
     }
 
+    public class ProductStockItem
+    {
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Barcode { get; set; } = string.Empty;
+    }
+    
     public class ProductStock
     {
         public string Barcode { get; set; }
