@@ -35,7 +35,6 @@
                             <tr>
                                 <td>@item.Barcode</td>
                                 <td>
-                                    &nbsp;
                                     <button type="button" class="btn btn-primary" @onclick="() => DeleteBarcodeItem(item.Id)"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
@@ -49,19 +48,35 @@
         </div>
         <div class="row">
             <div class="col">
-            <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
-    <option value="">Select</option>
-    @foreach (var location in Locations)
-    {
-        <option value="@location.Id">
-            @location.Name
-        </option>
-    }
-</InputSelect></div>
-            <div class="col"></div>
+                <InputSelect id="stockActionType" class="form-control" @bind-Value="locationItem2">
+                    <option value="">Select</option>
+                    @foreach (var actionType in stockItActionTypes)
+                    {
+                        <option value="@actionType.Id">
+                            @actionType.Name
+                        </option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="col">
+                <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
+                    <option value="">Select</option>
+                    @foreach (var location in Locations)
+                    {
+                        <option value="@location.Id">
+                            @location.Name
+                        </option>
+                    }
+                </InputSelect>
+            </div>
         </div>
         <div class="row">
-            <div class="col"><button type="submit" class="btn btn-primary edit-btn">Submit Stock</button></div>
+            <div class="col">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-primary" @onclick="() => SubmitStockItem()">Submit Stock</button>
+            </div>
         </div>
     </div>
 </EditForm>

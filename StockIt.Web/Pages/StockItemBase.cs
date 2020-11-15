@@ -22,6 +22,7 @@ namespace StockIt.Web.Pages
         protected List<ProductStockItem> productStockItems = new List<ProductStockItem>();
 
         protected string barcode;
+        protected StockItActionType stockItActionType = new StockItActionType();
 
         public string locationItem1;
         public string locationItem2;
@@ -36,18 +37,7 @@ namespace StockIt.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Locations = new List<Location>
-            {
-                new Location
-                {
-                    Name = "hh"
-                },
-                new Location
-                {
-                    Name = "gg"
-                }
-            };
-            ///Locations = await LocationDataService.GetAllAsync("rrhome");
+            Locations = await LocationDataService.GetAllAsync("rrhome");
         }
 
         protected async Task HandleValidSubmit()
@@ -86,6 +76,9 @@ namespace StockIt.Web.Pages
 
             await ProductDataService.UpdateStockAsync(storeProducts, "rrhome");
         }
+
+        protected async Task SubmitStockItem()
+        { }
 
         protected async Task SetActionType(int actionId)
         {
