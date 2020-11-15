@@ -21,13 +21,14 @@ namespace StockIt.Web.Pages
 
         protected List<ProductStockItem> productStockItems = new List<ProductStockItem>();
 
+        protected string barcode;
+
         public string locationItem1;
         public string locationItem2;
         protected bool saved = false;
         protected string message;
         protected bool isDisabled = true;
         protected string statusClass;
-        protected string barcode;
         protected StockModel stockModel = new StockModel();
 
         protected List<StockItActionType> stockItActionTypes = StockItConstants.ActionTypes;
@@ -94,23 +95,27 @@ namespace StockIt.Web.Pages
             }
         }
 
-        protected async Task DeleteBarcodeItem(string barcode)
+        protected async Task DeleteBarcodeItem(string id)
         {
-            if (!string.IsNullOrEmpty(barcode))
+            if (!string.IsNullOrEmpty(id))
             {
-                if (stockModel.Barcodes.Exists(x => x.Equals(barcode, StringComparison.OrdinalIgnoreCase)))
-                {
-                    stockModel.Barcodes.Remove(barcode);
+                var productStockItem = productStockItems.FirstOrDefault(x => x.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
+
+                if(productStockItem != null)
+                { 
+                    productStockItems.Remove(productStockItem);
                 }
             }
         }
 
-        protected async Task AddBarcodeItem(string barcode)
+        protected async Task AddBarcodeItem()
         {
             if (!string.IsNullOrEmpty(barcode))
             {
-                stockModel.Barcodes.Add(barcode);
+                productStockItems.Add(new ProductStockItem(barcode));
             }
+
+            barcode = string.Empty;
         }
     }
 }

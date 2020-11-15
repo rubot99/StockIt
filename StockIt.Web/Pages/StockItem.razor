@@ -8,11 +8,16 @@
     <ValidationSummary />
     <div class="container">
         <div class="row">
-            <div class="col-10">
+            <div class="col">
                 <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
             </div>
-            <div class="col-2">
-                <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem(barcode)"><i class="fas fa-plus"></i></button>
+            <div class="col">
+                <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem()"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                &nbsp;
             </div>
         </div>
         <div class="row">
@@ -28,7 +33,7 @@
                         @foreach (var item in productStockItems)
                         {
                             <tr>
-                                <td>@barcode</td>
+                                <td>@item.Barcode</td>
                                 <td>
                                     &nbsp;
                                     <button type="button" class="btn btn-primary" @onclick="() => DeleteBarcodeItem(item.Id)"><i class="fas fa-trash"></i></button>
@@ -39,84 +44,95 @@
                 </table>
             </div>
         </div>
+        <div class="row">
+            <div class="col">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"><button type="submit" class="btn btn-primary edit-btn">Submit Stock</button></div>
+        </div>
     </div>
 </EditForm>
-    @*<div class="row">
-            <div class="col-sm">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    @foreach (var actionType in stockItActionTypes)
-                    {
-                        <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name</button>
-                    }
+
+@*<div class="row">
+        <div class="col-sm">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                @foreach (var actionType in stockItActionTypes)
+                {
+                    <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name</button>
+                }
+            </div>
+        </div>
+    </div>*@
+@*@if (!saved)
+{
+    <EditForm Model="@stockModel" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="container">
+            <div class="form-group row">
+                <div class="col-sm">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        @foreach (var actionType in stockItActionTypes)
+                        {
+                            <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name</button>
+                        }
+                    </div>
                 </div>
             </div>
-        </div>*@
-    @if (!saved)
-    {
-        <EditForm Model="@stockModel" OnValidSubmit="@HandleValidSubmit">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="container">
-                <div class="form-group row">
-                    <div class="col-sm">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            @foreach (var actionType in stockItActionTypes)
+            <div class="form-group row">
+                <div class="col-sm">
+                    <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
+                        <option value="">Select</option>
+                        @foreach (var location in Locations)
                             {
-                                <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name</button>
+                            <option value="@location.Id">
+                                @location.Name
+                            </option>
                             }
-                        </div>
-                    </div>
+                    </InputSelect>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm">
-                        <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
-                            <option value="">Select</option>
-                            @foreach (var location in Locations)
-                                {
-                                <option value="@location.Id">
-                                    @location.Name
-                                </option>
-                                }
-                        </InputSelect>
-                    </div>
 
-                    <div class="col">
-                        <i class="fas fa-chevron-circle-right"></i>
-                    </div>
-                    <div class="col-sm">
-                        <InputSelect id="LocationItem2" disabled="@isDisabled" class="form-control" @bind-Value="locationItem2">
-                            <option value="">Select</option>
-                            @foreach (var location in Locations)
-                                {
-                                <option value="@location.Id">
-                                    @location.Name
-                                </option>
-                                }
-                        </InputSelect>
-                    </div>
+                <div class="col">
+                    <i class="fas fa-chevron-circle-right"></i>
                 </div>
-                @*<div class="form-group row">
-                        <div class="col-sm">
-                            <div class="form-group row">
-                                <label for="Barcode" class="col-sm-3">Barcode: </label>
-                                <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
-                            </div>
-                        </div>
-                        <div class="col-sm">
-                            <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem(barcode)"><i class="fas fa-plus"></i></button>
-                        </div>
-                    </div>*@
-                <div class="form-group row">
-                    <div class="col">
-
-                    </div>
+                <div class="col-sm">
+                    <InputSelect id="LocationItem2" disabled="@isDisabled" class="form-control" @bind-Value="locationItem2">
+                        <option value="">Select</option>
+                        @foreach (var location in Locations)
+                            {
+                            <option value="@location.Id">
+                                @location.Name
+                            </option>
+                            }
+                    </InputSelect>
                 </div>
             </div>
+            <div class="form-group row">
+                    <div class="col-sm">
+                        <div class="form-group row">
+                            <label for="Barcode" class="col-sm-3">Barcode: </label>
+                            <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem(barcode)"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            <div class="form-group row">
+                <div class="col">
 
-            <button type="submit" class="btn btn-primary edit-btn">Save Location</button>
-        </EditForm>
-    }
-    else
-    {
-        <div class="alert @statusClass">@message</div>
-    }
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary edit-btn">Save Location</button>
+    </EditForm>
+}
+else
+{
+    <div class="alert @statusClass">@message</div>
+}*@
