@@ -26,6 +26,7 @@ namespace StockIt.Web.Pages
 
         public string locationItem1;
         public string locationItem2;
+        public string actionType;
         protected bool saved = false;
         protected string message;
         protected bool isDisabled = true;
@@ -78,7 +79,14 @@ namespace StockIt.Web.Pages
         }
 
         protected async Task SubmitStockItem()
-        { }
+        {
+            stockModel.Location1 = Locations.FirstOrDefault(x => x.Id.Equals(locationItem1, StringComparison.OrdinalIgnoreCase));
+            productStockItems.Distinct()
+                .ToList()
+                .ForEach(x =>
+                {
+                });
+        }
 
         protected async Task SetActionType(int actionId)
         {
