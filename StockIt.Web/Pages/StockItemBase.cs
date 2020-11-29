@@ -41,51 +41,79 @@ namespace StockIt.Web.Pages
             Locations = await LocationDataService.GetAllAsync("rrhome");
         }
 
-        protected async Task HandleValidSubmit()
-        {
-            stockModel.Location1 = Locations.FirstOrDefault(x => x.Id.Equals(locationItem1, StringComparison.OrdinalIgnoreCase));
-            stockModel.Location2 = Locations.FirstOrDefault(x => x.Id.Equals(locationItem2, StringComparison.OrdinalIgnoreCase));
-            List<ProductStock> storeProducts = new List<ProductStock>();
+        ////protected async Task HandleValidSubmit()
+        ////{
+        ////    stockModel.Location1 = Locations.FirstOrDefault(x => x.Id.Equals(locationItem1, StringComparison.OrdinalIgnoreCase));
+        ////    stockModel.Location2 = Locations.FirstOrDefault(x => x.Id.Equals(locationItem2, StringComparison.OrdinalIgnoreCase));
+        ////    List<ProductStock> storeProducts = new List<ProductStock>();
 
-            stockModel
-                .Barcodes
+        ////    stockModel
+        ////        .Barcodes
+        ////        .Distinct()
+        ////        .ToList()
+        ////        .ForEach(x =>
+        ////        {
+        ////            var total = stockModel.Barcodes.FindAll(y => y.Equals(x, StringComparison.OrdinalIgnoreCase)).Count;
+        ////            var product = new ProductStock();
+        ////            product.Barcode = x;
+
+        ////            if (stockModel.ActionType.Name.Equals("Move Stock"))
+        ////            {
+        ////                product.RemoveItems.Add(new ProductLocation
+        ////                {
+        ////                    LocationId = locationItem1,
+        ////                    Quantity = total
+        ////                });
+        ////            }
+
+        ////            product.AddItems.Add(new ProductLocation
+        ////            {
+        ////                LocationId = stockModel.Location1.Id,
+        ////                Quantity = total
+        ////            });
+
+        ////            storeProducts.Add(product);
+        ////        });
+
+        ////    await ProductDataService.UpdateStockAsync(storeProducts, "rrhome");
+        ////}
+
+        protected async Task SubmitStockItem()
+        {
+            List<ProductStock> storeProducts = new List<ProductStock>();
+            stockModel.Location1 = Locations.FirstOrDefault(x => x.Id.Equals(locationItem1, StringComparison.OrdinalIgnoreCase));
+            productStockItems
+                .Select(x => x.Barcode)
                 .Distinct()
                 .ToList()
                 .ForEach(x =>
                 {
-                    var total = stockModel.Barcodes.FindAll(y => y.Equals(x, StringComparison.OrdinalIgnoreCase)).Count;
+                    var total = productStockItems.FindAll(y => y.Barcode.Equals(x, StringComparison.OrdinalIgnoreCase)).Count;
                     var product = new ProductStock();
                     product.Barcode = x;
 
-                    if (stockModel.ActionType.Name.Equals("Move Stock"))
+                    if (stockModel.ActionType.ActionTypeItem == StockItActionItem.ToStock || stockModel.ActionType.ActionTypeItem == StockItActionItem.MoveStock)
                     {
-                        product.RemoveItems.Add(new ProductLocation
+                        product.AddItems.Add(new ProductLocation
                         {
-                            LocationId = locationItem1,
+                            LocationId = stockModel.Location1.Id,
                             Quantity = total
                         });
                     }
 
-                    product.AddItems.Add(new ProductLocation
+                    if (stockModel.ActionType.ActionTypeItem == StockItActionItem.FromStock || stockModel.ActionType.ActionTypeItem == StockItActionItem.MoveStock)
                     {
-                        LocationId = stockModel.Location1.Id,
-                        Quantity = total
-                    });
+                        product.RemoveItems.Add(new ProductLocation
+                        {
+                            LocationId = stockModel.Location1.Id,
+                            Quantity = total
+                        });
+                    }
 
                     storeProducts.Add(product);
                 });
 
             await ProductDataService.UpdateStockAsync(storeProducts, "rrhome");
-        }
-
-        protected async Task SubmitStockItem()
-        {
-            stockModel.Location1 = Locations.FirstOrDefault(x => x.Id.Equals(locationItem1, StringComparison.OrdinalIgnoreCase));
-            productStockItems.Distinct()
-                .ToList()
-                .ForEach(x =>
-                {
-                });
         }
 
         protected async Task SetActionType(int actionId)

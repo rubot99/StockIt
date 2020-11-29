@@ -6,11 +6,13 @@ namespace StockIt.Web.ViewModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public StockItActionItem ActionTypeItem { get; set; }
 
-        public StockItActionType(int id, string name)
+        public StockItActionType(int id, StockItActionItem item, string name)
         {
             Id = id;
             Name = name;
+            ActionTypeItem = item;
         }
 
         public StockItActionType()

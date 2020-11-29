@@ -30,8 +30,8 @@ namespace StockIt.Web.ViewModels
     {
         public string Barcode { get; set; }
 
-        public List<ProductLocation> AddItems { get; set; }
-        public List<ProductLocation> RemoveItems { get; set; }
+        public List<ProductLocation> AddItems { get; set; } = new List<ProductLocation>();
+        public List<ProductLocation> RemoveItems { get; set; } = new List<ProductLocation>();
 
     }
 

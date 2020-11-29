@@ -6,9 +6,16 @@ namespace StockIt.Web.ViewModels
     {
         public static List<StockItActionType> ActionTypes = new List<StockItActionType>
         {
-            new StockItActionType(1, "To Stock"),
-            new StockItActionType(2, "From Stock"),
-            new StockItActionType(3, "Move Stock"),
+            new StockItActionType(1, StockItActionItem.ToStock, "To Stock"),
+            new StockItActionType(2, StockItActionItem.FromStock, "From Stock"),
+            new StockItActionType(3, StockItActionItem.MoveStock, "Move Stock"),
         };
+    }
+
+    public enum StockItActionItem
+    {
+        ToStock,
+        FromStock,
+        MoveStock
     }
 }
