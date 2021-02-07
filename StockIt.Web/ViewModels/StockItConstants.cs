@@ -8,7 +8,7 @@ namespace StockIt.Web.ViewModels
         {
             new StockItActionType(1, StockItActionItem.ToStock, "To Stock"),
             new StockItActionType(2, StockItActionItem.FromStock, "From Stock"),
-            new StockItActionType(3, StockItActionItem.MoveStock, "Move Stock"),
+            // new StockItActionType(3, StockItActionItem.MoveStock, "Move Stock"),
         };
     }
 
@@ -16,6 +16,6 @@ namespace StockIt.Web.ViewModels
     {
         ToStock,
         FromStock,
-        MoveStock
+        // MoveStock
     }
 }

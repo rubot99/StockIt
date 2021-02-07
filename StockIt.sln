@@ -13,6 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockIt.Api.Tests", "StockI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockIt.Web.Tests", "StockIt.Web.Tests\StockIt.Web.Tests.csproj", "{6148BD60-E01A-478F-B6E5-F41944F25C64}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DFD337A7-9D18-4CAA-91A9-E04E692D9277}"
+	ProjectSection(SolutionItems) = preProject
+		stylecop.ruleset = stylecop.ruleset
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

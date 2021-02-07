@@ -117,7 +117,7 @@ namespace StockIt.Web.Pages
                     var product = new ProductStock();
                     product.Barcode = x;
 
-                    if (stockModel.ActionType.ActionTypeItem == StockItActionItem.ToStock || stockModel.ActionType.ActionTypeItem == StockItActionItem.MoveStock)
+                    if (stockModel.ActionType.ActionTypeItem == StockItActionItem.ToStock) // || stockModel.ActionType.ActionTypeItem == StockItActionItem.MoveStock)
                     {
                         product.AddItems.Add(new ProductLocation
                         {
@@ -126,7 +126,7 @@ namespace StockIt.Web.Pages
                         });
                     }
 
-                    if (stockModel.ActionType.ActionTypeItem == StockItActionItem.FromStock || stockModel.ActionType.ActionTypeItem == StockItActionItem.MoveStock)
+                    if (stockModel.ActionType.ActionTypeItem == StockItActionItem.FromStock) // || stockModel.ActionType.ActionTypeItem == StockItActionItem.MoveStock)
                     {
                         product.RemoveItems.Add(new ProductLocation
                         {
