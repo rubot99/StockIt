@@ -121,6 +121,8 @@ namespace StockIt.Web.Data
                         storeItem.Quantity = storeItem.Quantity + x.Quantity;
                     }
                 });
+
+                await UpdateAsync(product).ConfigureAwait(false);
             }
 
             return result;

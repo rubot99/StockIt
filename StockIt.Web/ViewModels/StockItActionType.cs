@@ -15,6 +15,13 @@ namespace StockIt.Web.ViewModels
             ActionTypeItem = item;
         }
 
+        public StockItActionType(int id, StockItActionItem item)
+        {
+            Id = id;
+            Name = item.ToString();
+            ActionTypeItem = item;
+        }
+
         public StockItActionType()
         {
         }

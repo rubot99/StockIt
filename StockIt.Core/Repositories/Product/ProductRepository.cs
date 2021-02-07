@@ -39,7 +39,7 @@ namespace StockIt.Core.Repositories.Product
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
                 var query = session.Query<Product>()
-                    .Where(x => x.Id.Equals(id, StringComparison.OrdinalIgnoreCase)
+                    .Where(x => x.Barcode.Equals(id, StringComparison.OrdinalIgnoreCase)
                     && x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase));
 
                 return query.FirstOrDefault();

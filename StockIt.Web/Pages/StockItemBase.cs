@@ -80,8 +80,33 @@ namespace StockIt.Web.Pages
 
         protected async Task SubmitStockItem()
         {
+            var selectedActionType = stockItActionTypes.FirstOrDefault(x => x.Id == Convert.ToInt32(actionType));
+
+            stockModel.ActionType = selectedActionType;
+
             List<ProductStock> storeProducts = new List<ProductStock>();
             stockModel.Location1 = Locations.FirstOrDefault(x => x.Id.Equals(locationItem1, StringComparison.OrdinalIgnoreCase));
+
+            ////var distinctBarcodes = productStockItems.Select(x => x.Barcode)
+            ////    .Distinct()
+            ////    .ToList();
+            ////foreach (var distinctBarcode in distinctBarcodes)
+            ////{
+            ////    var total = productStockItems.FindAll(y => y.Barcode.Equals(distinctBarcode, StringComparison.OrdinalIgnoreCase)).Count;
+            ////    var product = new ProductStock();
+            ////    product.Barcode = distinctBarcode;
+
+            ////    if (stockModel.ActionType.ActionTypeItem == StockItActionItem.ToStock || stockModel.ActionType.ActionTypeItem == StockItActionItem.MoveStock)
+            ////    {
+            ////        product.AddItems.Add(new ProductLocation
+            ////        {
+            ////            LocationId = stockModel.Location1.Id,
+            ////            Quantity = total
+            ////        });
+            ////    }
+
+            ////    storeProducts.Add(product);
+            ////}
             productStockItems
                 .Select(x => x.Barcode)
                 .Distinct()
@@ -116,24 +141,24 @@ namespace StockIt.Web.Pages
             await ProductDataService.UpdateStockAsync(storeProducts, "rrhome");
         }
 
-        protected async Task SetActionType(int actionId)
-        {
-            var result = stockItActionTypes.FirstOrDefault(x => x.Id == actionId);
+        ////protected async Task SetActionType(int actionId)
+        ////{
+        ////    var result = stockItActionTypes.FirstOrDefault(x => x.Id == actionId);
 
-            if (result != null)
-            {
-                if (result.Name.Equals("Move Stock", StringComparison.OrdinalIgnoreCase))
-                {
-                    isDisabled = false;
-                }
-                else
-                {
-                    isDisabled = true;
-                }
+        ////    if (result != null)
+        ////    {
+        ////        if (result.Name.Equals("Move Stock", StringComparison.OrdinalIgnoreCase))
+        ////        {
+        ////            isDisabled = false;
+        ////        }
+        ////        else
+        ////        {
+        ////            isDisabled = true;
+        ////        }
 
-                stockModel.ActionType = result;
-            }
-        }
+        ////        stockModel.ActionType = result;
+        ////    }
+        ////}
 
         protected async Task DeleteBarcodeItem(string id)
         {
