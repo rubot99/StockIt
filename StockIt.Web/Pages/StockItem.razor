@@ -9,6 +9,33 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                <InputSelect id="stockActionType" class="form-control" @bind-Value="actionType">
+                    <option value="">Select</option>
+                    @foreach (var actionType in stockItActionTypes)
+                    {
+                        <option value="@actionType.Id">
+                            @actionType.Name
+                        </option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="col">
+                <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
+                    <option value="">Select</option>
+                    @foreach (var location in Locations)
+                    {
+                        <option value="@location.Id">
+                            @location.Name
+                        </option>
+                    }
+                </InputSelect>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
             </div>
             <div class="col">
@@ -41,33 +68,6 @@
                         }
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">&nbsp;</div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <InputSelect id="stockActionType" class="form-control" @bind-Value="actionType">
-                    <option value="">Select</option>
-                    @foreach (var actionType in stockItActionTypes)
-                    {
-                        <option value="@actionType.Id">
-                            @actionType.Name
-                        </option>
-                    }
-                </InputSelect>
-            </div>
-            <div class="col">
-                <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
-                    <option value="">Select</option>
-                    @foreach (var location in Locations)
-                    {
-                        <option value="@location.Id">
-                            @location.Name
-                        </option>
-                    }
-                </InputSelect>
             </div>
         </div>
         <div class="row">
