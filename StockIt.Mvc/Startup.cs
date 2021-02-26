@@ -7,7 +7,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using StockIt.Mvc.Common;
+using StockIt.Mvc.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +30,11 @@ namespace StockIt.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(Options.Create(Configuration.GetSection(StockApiConfig.StockApiConfigSection).Get<StockApiConfig>()));
+            services.AddHttpClient<ILocationDataService, LocationDataService>();
+            services.AddHttpClient<IProductDataService, ProductDataService>();
+            services.AddHttpClient<ITenantDataService, TenantDataService>();
+
             // Cookie configuration for HTTP to support cookies with SameSite=None
             ///services.ConfigureSameSiteNoneCookies();
 

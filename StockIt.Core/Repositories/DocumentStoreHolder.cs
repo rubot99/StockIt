@@ -17,7 +17,7 @@ namespace StockIt.Core.Repositories
             {
                 Urls = new[] { serverURL },
                 Database = databaseName,
-                Certificate = new X509Certificate2(@"C:\Users\reube\source\repos\StockIt\cert\StockItClient.pfx"),                
+                Certificate = new X509Certificate2(@"C:\Users\reube\source\keys\stockitmvc\stockitmvc.pfx"),                
             };
 
             documentStore.Initialize();
