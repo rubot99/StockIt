@@ -3,160 +3,170 @@
 
 <h3>Stock It</h3>
 
-<EditForm Model="@stockModel">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem()"><i class="fas fa-plus"></i></button>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
         </div>
-        <div class="row">
-            <div class="col">
-                &nbsp;
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Barcode</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in productStockItems)
-                        {
-                            <tr>
-                                <td>@item.Barcode</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" @onclick="() => DeleteBarcodeItem(item.Id)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">&nbsp;</div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <InputSelect id="stockActionType" class="form-control" @bind-Value="actionType">
-                    <option value="">Select</option>
-                    @foreach (var actionType in stockItActionTypes)
-                    {
-                        <option value="@actionType.Id">
-                            @actionType.Name
-                        </option>
-                    }
-                </InputSelect>
-            </div>
-            <div class="col">
-                <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
-                    <option value="">Select</option>
-                    @foreach (var location in Locations)
-                    {
-                        <option value="@location.Id">
-                            @location.Name
-                        </option>
-                    }
-                </InputSelect>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">&nbsp;</div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button type="button" class="btn btn-primary" @onclick="() => SubmitStockItem()">Submit Stock</button>
-            </div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem()"><i class="fas fa-plus"></i></button>
         </div>
     </div>
-</EditForm>
-
-@*<div class="row">
-        <div class="col-sm">
-            <div class="btn-group" role="group" aria-label="Basic example">
-                @foreach (var actionType in stockItActionTypes)
-                {
-                    <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name</button>
-                }
-            </div>
-        </div>
-    </div>*@
-@*@if (!saved)
-{
-    <EditForm Model="@stockModel" OnValidSubmit="@HandleValidSubmit">
+    </div>
+    <EditForm Model="@stockModel">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <div class="container">
-            <div class="form-group row">
-                <div class="col-sm">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        @foreach (var actionType in stockItActionTypes)
-                        {
-                            <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name</button>
-                        }
-                    </div>
+            @*<div class="row">
+                <div class="col">
+                    <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem()"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>*@
+            <div class="row">
+                <div class="col">
+                    &nbsp;
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-sm">
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Barcode</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in productStockItems)
+                            {
+                                <tr>
+                                    <td>@item.Barcode</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" @onclick="() => DeleteBarcodeItem(item.Id)"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <InputSelect id="stockActionType" class="form-control" @bind-Value="actionType">
+                        <option value="">Select</option>
+                        @foreach (var actionType in stockItActionTypes)
+                        {
+                            <option value="@actionType.Id">
+                                @actionType.Name
+                            </option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="col">
                     <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
                         <option value="">Select</option>
                         @foreach (var location in Locations)
-                            {
+                        {
                             <option value="@location.Id">
                                 @location.Name
                             </option>
-                            }
-                    </InputSelect>
-                </div>
-
-                <div class="col">
-                    <i class="fas fa-chevron-circle-right"></i>
-                </div>
-                <div class="col-sm">
-                    <InputSelect id="LocationItem2" disabled="@isDisabled" class="form-control" @bind-Value="locationItem2">
-                        <option value="">Select</option>
-                        @foreach (var location in Locations)
-                            {
-                            <option value="@location.Id">
-                                @location.Name
-                            </option>
-                            }
+                        }
                     </InputSelect>
                 </div>
             </div>
-            <div class="form-group row">
-                    <div class="col-sm">
-                        <div class="form-group row">
-                            <label for="Barcode" class="col-sm-3">Barcode: </label>
-                            <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem(barcode)"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-            <div class="form-group row">
+            <div class="row">
+                <div class="col">&nbsp;</div>
+            </div>
+            <div class="row">
                 <div class="col">
-
+                    <button type="button" class="btn btn-primary" @onclick="() => SubmitStockItem()">Submit Stock</button>
                 </div>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-primary edit-btn">Save Location</button>
     </EditForm>
-}
-else
-{
-    <div class="alert @statusClass">@message</div>
-}*@
+
+    @*<div class="row">
+            <div class="col-sm">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    @foreach (var actionType in stockItActionTypes)
+                    {
+                        <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name</button>
+                    }
+                </div>
+            </div>
+        </div>*@
+    @*@if (!saved)
+        {
+            <EditForm Model="@stockModel" OnValidSubmit="@HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="container">
+                    <div class="form-group row">
+                        <div class="col-sm">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                @foreach (var actionType in stockItActionTypes)
+                                {
+                                    <button type="button" class="btn btn-secondary" @onclick="() => SetActionType(actionType.Id)">@actionType.Name</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm">
+                            <InputSelect id="LocationItem1" class="form-control" @bind-Value="locationItem1">
+                                <option value="">Select</option>
+                                @foreach (var location in Locations)
+                                    {
+                                    <option value="@location.Id">
+                                        @location.Name
+                                    </option>
+                                    }
+                            </InputSelect>
+                        </div>
+
+                        <div class="col">
+                            <i class="fas fa-chevron-circle-right"></i>
+                        </div>
+                        <div class="col-sm">
+                            <InputSelect id="LocationItem2" disabled="@isDisabled" class="form-control" @bind-Value="locationItem2">
+                                <option value="">Select</option>
+                                @foreach (var location in Locations)
+                                    {
+                                    <option value="@location.Id">
+                                        @location.Name
+                                    </option>
+                                    }
+                            </InputSelect>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                            <div class="col-sm">
+                                <div class="form-group row">
+                                    <label for="Barcode" class="col-sm-3">Barcode: </label>
+                                    <InputText id="Barcode" class="form-control col-sm-8" @bind-Value="@barcode" placeholder="Enter Barcode"></InputText>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <button type="button" class="btn btn-primary" @onclick="() => AddBarcodeItem(barcode)"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    <div class="form-group row">
+                        <div class="col">
+
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary edit-btn">Save Location</button>
+            </EditForm>
+        }
+        else
+        {
+            <div class="alert @statusClass">@message</div>
+        }*@
