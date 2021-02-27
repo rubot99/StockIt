@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StockIt.Core.Repositories.Location;
 using StockIt.Mvc.Services;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StockIt.Mvc.Controllers
 {
-    public class LocationController : Controller
+    public class LocationController : BaseController
     {
         private readonly ILocationDataService locationDataService;
 
@@ -19,7 +20,7 @@ namespace StockIt.Mvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var locationList = await locationDataService.GetAllAsync("rrhome").ConfigureAwait(false);
+            var locationList = await locationDataService.GetAllAsync(base.Teanat).ConfigureAwait(false);
             return View(locationList);
         }
 
@@ -29,9 +30,25 @@ namespace StockIt.Mvc.Controllers
             return View(location);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(Location location)
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Location location)
+        {
+            location.Enabled = true;
+            location.Tenant = base.Teanat;
+            await locationDataService.AddAsync(location).ConfigureAwait(false);
+
+            return RedirectToAction("Index", "Location");
         }
 
         public async Task<IActionResult> Delete(string id, string tenant)

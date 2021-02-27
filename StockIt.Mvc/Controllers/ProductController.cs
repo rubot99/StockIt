@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StockIt.Mvc.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         private readonly IProductDataService productDataService;
 
@@ -17,7 +17,7 @@ namespace StockIt.Mvc.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var productList = await productDataService.GetAllAsync("rrhome").ConfigureAwait(false);
+            var productList = await productDataService.GetAllAsync(base.Teanat).ConfigureAwait(false);
             return View(productList);
         }
 
