@@ -56,5 +56,13 @@ namespace StockIt.Mvc.Controllers
             var location = await locationDataService.GetAsync(id, tenant).ConfigureAwait(false);
             return View(location);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Location location)
+        {
+            await locationDataService.DeleteAsync(location.Id, base.Teanat).ConfigureAwait(false);
+
+            return RedirectToAction("Index", "Location");
+        }
     }
 }

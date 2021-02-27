@@ -51,13 +51,14 @@ namespace StockIt.Api.Controllers.v1
             return Ok(location);
         }
 
-        [HttpDelete("id/{id}")]
-        public IActionResult Delete(string id)
+        [HttpDelete("id/{id}/tenant/{tenant}")]
+        public IActionResult Delete([FromRoute] string id, [FromRoute] string tenant)
         {
-            var tenant = locationRepository.Delete(
+            locationRepository.Delete(
                 new Location
                 {
-                    Id = id
+                    Id = id,
+                    Tenant = tenant,
                 });
 
             return Ok();

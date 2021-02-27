@@ -38,9 +38,9 @@ namespace StockIt.Mvc.Services
             return t;
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(string id, string tenant)
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"{url}/id/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"{url}/id/{id}/tenant/{tenant}");
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
 
             return response.IsSuccessStatusCode;
