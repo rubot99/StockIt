@@ -17,8 +17,8 @@ namespace StockIt.Mvc.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var response = await productDataService.GetAllAsync("rrhome").ConfigureAwait(false);
-            return View(response);
+            var productList = await productDataService.GetAllAsync("rrhome").ConfigureAwait(false);
+            return View(productList);
         }
     }
 }

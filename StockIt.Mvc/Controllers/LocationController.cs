@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StockIt.Mvc.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,18 @@ namespace StockIt.Mvc.Controllers
 {
     public class LocationController : Controller
     {
-        [Authorize]
-        public IActionResult Index()
+        private readonly ILocationDataService locationDataService;
+
+        public LocationController(ILocationDataService locationDataService)
         {
-            return View();
+            this.locationDataService = locationDataService;
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Index()
+        {
+            var locationList = await locationDataService.GetAllAsync("rrhome").ConfigureAwait(false);
+            return View(locationList);
         }
     }
 }
