@@ -40,5 +40,19 @@ namespace StockIt.Mvc.Controllers
             var product = await productDataService.GetAsync(id, tenant).ConfigureAwait(false);
             return View(product);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Product product)
+        {
+            product.Enabled = true;
+            product.Tenant = base.Teanat;
+            await productDataService.AddAsync(product).ConfigureAwait(false);
+            return RedirectToAction("Index", "Product");
+        }
     }
 }
