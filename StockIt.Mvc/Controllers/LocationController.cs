@@ -17,7 +17,6 @@ namespace StockIt.Mvc.Controllers
             this.locationDataService = locationDataService;
         }
 
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             var locationList = await locationDataService.GetAllAsync("rrhome").ConfigureAwait(false);
