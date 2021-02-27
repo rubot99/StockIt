@@ -23,21 +23,20 @@ namespace StockIt.Mvc.Controllers
             return View(locationList);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string id, string tenant)
         {
-            var location = await locationDataService.GetAsync(id, "rrhome").ConfigureAwait(false);
+            var location = await locationDataService.GetAsync(id, tenant).ConfigureAwait(false);
             return View(location);
         }
 
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Create()
         {
-            var location = await locationDataService.GetAsync(id, "rrhome").ConfigureAwait(false);
-            return View(location);
+            return View();
         }
 
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id, string tenant)
         {
-            var location = await locationDataService.DeleteAsync(id).ConfigureAwait(false);
+            var location = await locationDataService.GetAsync(id, tenant).ConfigureAwait(false);
             return View(location);
         }
     }
