@@ -20,5 +20,17 @@ namespace StockIt.Mvc.Controllers
             var productList = await productDataService.GetAllAsync("rrhome").ConfigureAwait(false);
             return View(productList);
         }
+
+        public async Task<IActionResult> Delete(string id, string tenant)
+        {
+            var product = await productDataService.GetAsync(id, tenant).ConfigureAwait(false);
+            return View(product);
+        }
+
+        public async Task<IActionResult> Edit(string id, string tenant)
+        {
+            var product = await productDataService.GetAsync(id, tenant).ConfigureAwait(false);
+            return View(product);
+        }
     }
 }
