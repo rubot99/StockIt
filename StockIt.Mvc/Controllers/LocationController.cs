@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockIt.Mvc.Services;
 using System;
@@ -24,4 +24,5 @@ namespace StockIt.Mvc.Controllers
             return View(locationList);
         }
     }
+}
 }
