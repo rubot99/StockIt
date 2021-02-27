@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,9 +78,9 @@ namespace StockIt.Mvc.Controllers
                 return RedirectToAction(nameof(Index));
             }
             catch
-            {
-                return View();
-            }
+        {
+            return View();
         }
     }
+}
 }
