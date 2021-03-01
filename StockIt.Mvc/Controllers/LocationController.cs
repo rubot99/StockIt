@@ -20,7 +20,7 @@ namespace StockIt.Mvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var locationList = await locationDataService.GetAllAsync(base.Teanat).ConfigureAwait(false);
+            var locationList = await locationDataService.GetAllAsync(base.Tenant).ConfigureAwait(false);
             return View(locationList);
         }
 
@@ -45,7 +45,7 @@ namespace StockIt.Mvc.Controllers
         public async Task<IActionResult> Create(Location location)
         {
             location.Enabled = true;
-            location.Tenant = base.Teanat;
+            location.Tenant = base.Tenant;
             await locationDataService.AddAsync(location).ConfigureAwait(false);
 
             return RedirectToAction("Index", "Location");
@@ -60,7 +60,7 @@ namespace StockIt.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Location location)
         {
-            await locationDataService.DeleteAsync(location.Id, base.Teanat).ConfigureAwait(false);
+            await locationDataService.DeleteAsync(location.Id, base.Tenant).ConfigureAwait(false);
 
             return RedirectToAction("Index", "Location");
         }

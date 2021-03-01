@@ -18,7 +18,7 @@ namespace StockIt.Mvc.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var productList = await productDataService.GetAllAsync(base.Teanat).ConfigureAwait(false);
+            var productList = await productDataService.GetAllAsync(base.Tenant).ConfigureAwait(false);
             return View(productList);
         }
 
@@ -31,7 +31,7 @@ namespace StockIt.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Product product)
         {
-            await productDataService.DeleteAsync(product.Id, base.Teanat).ConfigureAwait(false);
+            await productDataService.DeleteAsync(product.Id, base.Tenant).ConfigureAwait(false);
             return View();
         }
 
@@ -50,7 +50,7 @@ namespace StockIt.Mvc.Controllers
         public async Task<IActionResult> Create(Product product)
         {
             product.Enabled = true;
-            product.Tenant = base.Teanat;
+            product.Tenant = base.Tenant;
             await productDataService.AddAsync(product).ConfigureAwait(false);
             return RedirectToAction("Index", "Product");
         }
