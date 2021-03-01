@@ -13,16 +13,18 @@ namespace StockIt.Mvc.Controllers
     public class StockItemController : BaseController
     {
         private readonly ILocationDataService locationDataService;
+        private readonly IStockItemDataService stockItemDataService;
 
-        public StockItemController(ILocationDataService locationDataService)
+        public StockItemController(ILocationDataService locationDataService, IStockItemDataService stockItemDataService)
         {
             this.locationDataService = locationDataService;
+            this.stockItemDataService = stockItemDataService;
         }
 
         public async Task<IActionResult> Index()
         {            
             ViewBag.LocationId = new SelectList(await locationDataService.GetAllAsync(base.Tenant), "Id", "Name");
-            ViewBag.StockActionId = new SelectList((from StockAction select { Id = }), "Id", "Name");
+            ViewBag.StockActionId = new SelectList(await stockItemDataService.GetStockActionsAsync(), "Id", "Name");
 
             return View("Create");
         }

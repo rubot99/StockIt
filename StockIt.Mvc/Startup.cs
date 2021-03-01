@@ -34,6 +34,7 @@ namespace StockIt.Mvc
             services.AddHttpClient<ILocationDataService, LocationDataService>();
             services.AddHttpClient<IProductDataService, ProductDataService>();
             services.AddHttpClient<ITenantDataService, TenantDataService>();
+            services.AddHttpClient<IStockItemDataService, StockItemDataervice>();
 
             // Cookie configuration for HTTP to support cookies with SameSite=None
             ///services.ConfigureSameSiteNoneCookies();
