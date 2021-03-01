@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StockIt.Core.Repositories.Product;
 using StockIt.Mvc.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace StockIt.Mvc.Controllers
@@ -31,8 +28,8 @@ namespace StockIt.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Product product)
         {
-            await productDataService.DeleteAsync(product.Id, base.Tenant).ConfigureAwait(false);
-            return View();
+            await productDataService.DeleteAsync(product.Id, base.Teanat).ConfigureAwait(false);
+            return RedirectToAction("Index", "Product");
         }
 
         public async Task<IActionResult> Edit(string id, string tenant)

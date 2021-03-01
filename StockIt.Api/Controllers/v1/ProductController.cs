@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using StockIt.Core.Repositories.Product;
 
@@ -58,13 +53,14 @@ namespace StockIt.Api.Controllers.v1
             return Ok(products);
         }
 
-        [HttpDelete("id/{id}")]
-        public IActionResult Delete(string id)
+        [HttpDelete("id/{id}/tenant/{tenant}")]
+        public IActionResult Delete([FromRoute] string id, [FromRoute] string tenant)
         {
-            var tenant = productRepository.Delete(
+            productRepository.Delete(
                 new Product
                 {
-                    Id = id
+                    Id = id,
+                    Tenant = tenant,
                 });
 
             return Ok();
