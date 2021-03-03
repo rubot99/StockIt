@@ -22,8 +22,6 @@ namespace StockIt.Mvc.Controllers
         public async Task<IActionResult> Index()
         {            
             ViewBag.LocationId = new SelectList(await locationDataService.GetAllAsync(base.Tenant), "Id", "Name");
-            ViewBag.StockActionId = new SelectList((from StockAction select { Id = }), "Id", "Name");
-
             return View("Create");
         }
 

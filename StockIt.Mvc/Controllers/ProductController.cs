@@ -28,7 +28,7 @@ namespace StockIt.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Product product)
         {
-            await productDataService.DeleteAsync(product.Id, base.Teanat).ConfigureAwait(false);
+            await productDataService.DeleteAsync(product.Id, base.Tenant).ConfigureAwait(false);
             return RedirectToAction("Index", "Product");
         }
 

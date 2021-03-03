@@ -22,11 +22,6 @@
                 <select asp-for="StockActionItem" asp-items="@Model.StockActions" />
             </div>*@
             <div class="form-group">
-                @Html.LabelFor(model => model.LocationId, "LocationId", new { @class = "control-label col-md-2" })
-                
-                @Html.DropDownList("LocationId", string.Empty)
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
