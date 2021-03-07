@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StockIt.Core.Repositories.Stock;
+using StockIt.Mvc.Models;
 using StockIt.Mvc.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Mvc.Html;
 
 namespace StockIt.Mvc.Controllers
 {
@@ -22,19 +19,26 @@ namespace StockIt.Mvc.Controllers
         }
 
         public async Task<IActionResult> Index()
-        {            
-            ViewBag.LocationId = new SelectList(await locationDataService.GetAllAsync(base.Tenant), "Id", "Name");
-            ViewBag.StockActionId = new SelectList(await stockItemDataService.GetStockActionsAsync(), "Id", "Name");
+        {
+            ViewData["LocationId"] = new SelectList(await locationDataService.GetAllAsync(base.Tenant), "Id", "Name");
+            var k = new SelectList(await stockItemDataService.GetStockActionsAsync(), "Value", "Text");
+            ViewData["StockActionId"] = k;
 
-            return View("Create");
+            return View(new RecievedStockItem("sdffd"));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index([Bind(include:"LocationId, Barcode, StockActionId")] TemporaryStockItem stockItem)
+        public async Task<IActionResult> Index([Bind(include: "LocationId, Barcode, StockActionId")] TemporaryStockItem stockItem)
         {
             stockItem.Tenant = base.Tenant;
 
             return View();
+        }
+
+        [HttpGet("tr")]
+        public async Task<IActionResult> Create()
+        {
+            return View("Viewewewew");
         }
     }
 }
