@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StockIt.Core.Repositories.Location;
-using StockIt.Core.Repositories.Stock;
 using StockIt.Mvc.Models;
 using StockIt.Mvc.Services;
 using System.Collections.Generic;
@@ -35,21 +34,19 @@ namespace StockIt.Mvc.Controllers
                     Name="dsfsdfdsfsd",
                 }
             };
-
+            TempData["RRID"] = "Hey";
             /////ViewData["LocationId"] = new SelectList(await locationDataService.GetAllAsync(base.Tenant), "Id", "Name");
-            var k = new SelectList(await stockItemDataService.GetStockActionsAsync(), "Value", "Text");
-            ViewData["StockActionId"] = k;
-            var r = new RecievedStockItem("sdffd");
+
+            var r = new RecievedStockItemViewModel();
             r.LocationList = new SelectList(l, "Id", "Name");
 
             return View(r);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index([Bind(include: "LocationId, Barcode, StockActionId")] TemporaryStockItem stockItem)
+        public IActionResult Index(RecievedStockItemViewModel stockItem)
         {
-            stockItem.Tenant = base.Tenant;
-
+            var k = TempData["RRID"];
             return View();
         }
 
