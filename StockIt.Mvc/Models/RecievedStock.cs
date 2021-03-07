@@ -1,4 +1,5 @@
-﻿using StockIt.Core.Repositories.Stock;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using StockIt.Core.Repositories.Stock;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,5 +28,7 @@ namespace StockIt.Mvc.Models
 
         [EnumDataType(typeof(StockAction))]
         public StockAction ActionType { get; set; }
+        public string LocationId { get; set; }
+        public SelectList LocationList { get; set; }
     }
 }
