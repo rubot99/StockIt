@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace StockIt.Mvc.Services
 {
-    public class StockItemDataervice : IStockItemDataService
+    public class StockItemDataService : IStockItemDataService
     {
         private readonly HttpClient httpClient;
         private readonly string url;
 
-        public StockItemDataervice(HttpClient httpClient, IOptions<StockApiConfig> stockApiConfig)
+        public StockItemDataService(HttpClient httpClient, IOptions<StockApiConfig> stockApiConfig)
         {
             this.httpClient = httpClient;
 

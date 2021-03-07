@@ -114,7 +114,7 @@
     <Rule Id="SX1309S" Action="None" />
   </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.OrderingRules">
-    <Rule Id="SA1200" Action="Warning" />
+    <Rule Id="SA1200" Action="None" />
     <Rule Id="SA1201" Action="Warning" />
     <Rule Id="SA1202" Action="Warning" />
     <Rule Id="SA1203" Action="Warning" />
@@ -202,7 +202,7 @@
     <Rule Id="SA1025" Action="Warning" />
     <Rule Id="SA1026" Action="Warning" />
     <Rule Id="SA1027" Action="Warning" />
-    <Rule Id="SA1028" Action="Warning" />	
+    <Rule Id="SA1028" Action="Warning" />
   </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.SpecialRules">
     <Rule Id="SA0001" Action="Warning" />

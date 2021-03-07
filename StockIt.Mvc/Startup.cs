@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,8 +11,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using StockIt.Mvc.Common;
 using StockIt.Mvc.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace StockIt.Mvc
@@ -34,6 +31,7 @@ namespace StockIt.Mvc
             services.AddHttpClient<ILocationDataService, LocationDataService>();
             services.AddHttpClient<IProductDataService, ProductDataService>();
             services.AddHttpClient<ITenantDataService, TenantDataService>();
+            services.AddHttpClient<IStockItemDataService, StockItemDataService>();
 
             // Cookie configuration for HTTP to support cookies with SameSite=None
             ///services.ConfigureSameSiteNoneCookies();
@@ -87,8 +85,8 @@ namespace StockIt.Mvc
                         {
                             if (postLogoutUri.StartsWith("/"))
                             {
-                            // transform to absolute
-                            var request = context.Request;
+                                // transform to absolute
+                                var request = context.Request;
                                 postLogoutUri = request.Scheme + "://" + request.Host + request.PathBase + postLogoutUri;
                             }
                             logoutUri += $"&returnTo={ Uri.EscapeDataString(postLogoutUri)}";
