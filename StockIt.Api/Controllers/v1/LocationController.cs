@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using StockIt.Core.Repositories.Location;
+using StockIt.Core.Repositories.Locations;
 
 namespace StockIt.Api.Controllers.v1
 {

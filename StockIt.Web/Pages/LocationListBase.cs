@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using StockIt.Core.Repositories.Location;
+using StockIt.Core.Repositories.Locations;
 using StockIt.Web.Data;
 using System;
 using System.Collections.Generic;

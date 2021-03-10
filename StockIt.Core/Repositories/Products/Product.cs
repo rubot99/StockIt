@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace StockIt.Core.Repositories.Product
+namespace StockIt.Core.Repositories.Products
 {
     public class Product : BaseTenantModel
     {

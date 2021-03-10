@@ -1,4 +1,4 @@
-﻿using StockIt.Core.Repositories.Tenant;
+﻿using StockIt.Core.Repositories.Tenants;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

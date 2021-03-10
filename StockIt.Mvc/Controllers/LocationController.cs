@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StockIt.Core.Repositories.Location;
+using StockIt.Core.Repositories.Locations;
 using StockIt.Mvc.Services;
 using System;
 using System.Collections.Generic;

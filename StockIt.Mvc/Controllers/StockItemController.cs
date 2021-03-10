@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using StockIt.Core.Repositories.Location;
+using StockIt.Core.Repositories.Locations;
 using StockIt.Mvc.Models;
 using StockIt.Mvc.Services;
 using System.Collections.Generic;
@@ -12,48 +12,32 @@ namespace StockIt.Mvc.Controllers
     {
         private readonly ILocationDataService locationDataService;
         private readonly IStockItemDataService stockItemDataService;
+        private readonly RecievedStockViewModel recievedStockViewModel;
 
         public StockItemController(ILocationDataService locationDataService, IStockItemDataService stockItemDataService)
         {
             this.locationDataService = locationDataService;
             this.stockItemDataService = stockItemDataService;
+            recievedStockViewModel = new RecievedStockViewModel();
         }
 
         public async Task<IActionResult> Index()
         {
-            var l = new List<Location>
+            var recievedStockItem = new RecievedStockItemViewModel
             {
-                new Location
-                {
-                    Id = "1",
-                    Name="dsfsd",
-                },
-                new Location
-                {
-                    Id = "2",
-                    Name="dsfsdfdsfsd",
-                }
+                LocationList = new SelectList(await locationDataService.GetAllAsync(base.Tenant), "Id", "Name")
             };
-            TempData["RRID"] = "Hey";
-            /////ViewData["LocationId"] = new SelectList(await locationDataService.GetAllAsync(base.Tenant), "Id", "Name");
 
-            var r = new RecievedStockItemViewModel();
-            r.LocationList = new SelectList(l, "Id", "Name");
+            TempData["RSID"] = recievedStockItem.Id;
 
-            return View(r);
+            return View(recievedStockItem);
         }
 
         [HttpPost]
-        public IActionResult Index(RecievedStockItemViewModel stockItem)
+        public IActionResult Index(RecievedStockItemViewModel recievedStockItem)
         {
-            var k = TempData["RRID"];
+            var isd = TempData["RSID"];
             return View();
-        }
-
-        [HttpGet("tr")]
-        public async Task<IActionResult> Create()
-        {
-            return View("Viewewewew");
         }
     }
 }

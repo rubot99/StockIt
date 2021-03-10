@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StockIt.Core.Repositories.Product
+namespace StockIt.Core.Repositories.Products
 {
     public interface IProductRepository : IRepository<Product>
     {

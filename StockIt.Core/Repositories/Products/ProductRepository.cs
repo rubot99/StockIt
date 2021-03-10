@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StockIt.Core.Repositories.Product
+namespace StockIt.Core.Repositories.Products
 {
     public class ProductRepository : IProductRepository
     {
@@ -70,17 +70,17 @@ namespace StockIt.Core.Repositories.Product
 
         public List<Product> SearchByCategory(string category)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public List<Product> SearchById(string id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public List<Product> SearchByLocation(string location)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public List<Product> SearchByName(string name)
@@ -97,7 +97,7 @@ namespace StockIt.Core.Repositories.Product
 
         public List<Product> SearchByTags(List<string> tags)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Product Update(Product t)

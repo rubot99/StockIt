@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using StockIt.Core.Repositories.StockItems;
 using System.Collections.Generic;
 using System.ComponentModel;
 

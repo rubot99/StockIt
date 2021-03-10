@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace StockIt.Core.Repositories.Product
+namespace StockIt.Core.Repositories.Products
 {
     public class StoreItem
     {

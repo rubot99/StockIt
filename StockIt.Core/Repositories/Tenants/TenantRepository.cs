@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace StockIt.Core.Repositories.Tenant
+namespace StockIt.Core.Repositories.Tenants
 {
     public class TenantRepository : ITenantRepository
     {

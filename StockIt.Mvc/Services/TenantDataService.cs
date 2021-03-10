@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using StockIt.Core.Repositories.Tenant;
+using StockIt.Core.Repositories.Tenants;
 using StockIt.Mvc.Common;
 using System;
 using System.Collections.Generic;

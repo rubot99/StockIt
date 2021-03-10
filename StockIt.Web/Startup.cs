@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using StockIt.Core.Extensions;
-using StockIt.Core.Repositories.Product;
+using StockIt.Core.Repositories.Products;
 using StockIt.Web.Common;
 using StockIt.Web.Data;
 

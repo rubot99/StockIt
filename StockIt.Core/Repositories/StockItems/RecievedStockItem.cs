@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using StockIt.Core.Repositories.StockItems;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace StockIt.Mvc.Models
+namespace StockIt.Core.Repositories.StockItems
 {
-    public class RecievedStockItemViewModel
+    public class RecievedStockItem
     {
         [Required]
         public string RecieveStockId { get; private set; }
@@ -22,7 +20,5 @@ namespace StockIt.Mvc.Models
 
         [Required]
         public string LocationId { get; set; }
-
-        public SelectList LocationList { get; set; }
     }
 }

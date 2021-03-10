@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using StockIt.Core.Repositories.Product;
+using StockIt.Core.Repositories.Products;
 
 namespace StockIt.Api.Controllers.v1
 {

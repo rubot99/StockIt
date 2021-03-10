@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StockIt.Core.Repositories;
-using StockIt.Core.Repositories.Product;
+using StockIt.Core.Repositories.Products;
 using StockIt.Web.Data;
 using System;
 using System.Collections.Generic;

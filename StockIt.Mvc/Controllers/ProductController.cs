@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using StockIt.Core.Repositories.Product;
+using StockIt.Core.Repositories.Products;
 using StockIt.Mvc.Services;
 using System.Threading.Tasks;
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace StockIt.Core.Repositories.Location
+namespace StockIt.Core.Repositories.Locations
 {
     public class LocationRepository : ILocationRepository
     {

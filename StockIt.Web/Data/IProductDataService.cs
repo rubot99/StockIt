@@ -1,4 +1,4 @@
-﻿using StockIt.Core.Repositories.Product;
+﻿using StockIt.Core.Repositories.Products;
 using StockIt.Web.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;

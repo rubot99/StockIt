@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace StockIt.Core.Repositories.Location
+namespace StockIt.Core.Repositories.Locations
 {
     public class Location : BaseTenantModel
     {

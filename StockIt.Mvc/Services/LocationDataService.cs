@@ -2,7 +2,7 @@
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using StockIt.Core.Repositories.Location;
+using StockIt.Core.Repositories.Locations;
 using StockIt.Mvc.Common;
 using System;
 using System.Collections.Generic;

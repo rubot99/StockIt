@@ -11,9 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using StockIt.Core.Repositories.Location;
-using StockIt.Core.Repositories.Product;
-using StockIt.Core.Repositories.Tenant;
+using StockIt.Core.Repositories.Locations;
+using StockIt.Core.Repositories.Products;
+using StockIt.Core.Repositories.Tenants;
 
 namespace StockIt.Api
 {

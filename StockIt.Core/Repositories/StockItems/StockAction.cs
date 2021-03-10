@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace StockIt.Core.Repositories.Stock
+namespace StockIt.Core.Repositories.StockItems
 {
     public enum StockAction
     {

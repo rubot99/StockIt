@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using StockIt.Core.Repositories.Product;
+using StockIt.Core.Repositories.Products;
 using StockIt.Web.Common;
 using StockIt.Web.ViewModels;
 using System;

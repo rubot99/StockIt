@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace StockIt.Core.Repositories.Tenant
+namespace StockIt.Core.Repositories.Tenants
 {
     public interface ITenantRepository : IRepository<Tenant>
     {

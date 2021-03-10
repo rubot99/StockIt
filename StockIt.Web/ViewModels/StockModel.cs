@@ -1,4 +1,4 @@
-﻿using StockIt.Core.Repositories.Location;
+﻿using StockIt.Core.Repositories.Locations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

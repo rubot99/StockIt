@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace StockIt.Core.Repositories.Location
+namespace StockIt.Core.Repositories.Locations
 {
     public interface ILocationRepository : IRepository<Location>
     {
