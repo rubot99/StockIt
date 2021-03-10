@@ -34,9 +34,13 @@ namespace StockIt.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(RecievedStockItemViewModel recievedStockItem)
+        public IActionResult Index(RecievedStockItemViewModel recievedStockItemViewModel)
         {
-            var isd = TempData["RSID"];
+            var rsid = TempData["RSID"];
+            recievedStockItemViewModel.RecieveStockId = rsid.ToString();
+
+            recievedStockViewModel.Items.Add(recievedStockItemViewModel);
+                
             return View();
         }
     }

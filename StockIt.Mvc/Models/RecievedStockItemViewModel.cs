@@ -8,7 +8,7 @@ namespace StockIt.Mvc.Models
     public class RecievedStockItemViewModel
     {
         [Required]
-        public string RecieveStockId { get; private set; }
+        public string RecieveStockId { get; set; }
 
         [Required]
         public string Id { get; private set; } = Guid.NewGuid().ToString();
