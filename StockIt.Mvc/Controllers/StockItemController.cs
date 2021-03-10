@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using StockIt.Core.Repositories.Locations;
 using StockIt.Mvc.Models;
 using StockIt.Mvc.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,13 +15,13 @@ namespace StockIt.Mvc.Controllers
     {
         private readonly ILocationDataService locationDataService;
         private readonly IStockItemDataService stockItemDataService;
-        private readonly RecievedStockViewModel recievedStockViewModel;
+        ///private readonly RecievedStockViewModel recievedStockViewModel;
 
         public StockItemController(ILocationDataService locationDataService, IStockItemDataService stockItemDataService)
         {
             this.locationDataService = locationDataService;
             this.stockItemDataService = stockItemDataService;
-            recievedStockViewModel = new RecievedStockViewModel();
+            ///recievedStockViewModel = new RecievedStockViewModel();
         }
 
         public async Task<IActionResult> Index()
@@ -28,7 +31,16 @@ namespace StockIt.Mvc.Controllers
                 LocationList = new SelectList(await locationDataService.GetAllAsync(base.Tenant), "Id", "Name")
             };
 
-            TempData["RSID"] = recievedStockItem.Id;
+            var tempData = TempData["RSID2"];
+
+            int count = 0;
+            if (tempData != null)
+            {
+                var recievedStockViewModel = JsonConvert.DeserializeObject<RecievedStockViewModel>(TempData["RSID2"].ToString());
+                count = recievedStockViewModel.Items.Count;
+            }
+
+            ViewData["StockCount"] = count;
 
             return View(recievedStockItem);
         }
@@ -36,12 +48,25 @@ namespace StockIt.Mvc.Controllers
         [HttpPost]
         public IActionResult Index(RecievedStockItemViewModel recievedStockItemViewModel)
         {
-            var rsid = TempData["RSID"];
-            recievedStockItemViewModel.RecieveStockId = rsid.ToString();
+            var tempData = TempData["RSID2"];
+            RecievedStockViewModel recievedStockViewModel;
 
+            if (tempData != null)
+            {
+                recievedStockViewModel = JsonConvert.DeserializeObject<RecievedStockViewModel>(tempData.ToString());
+            }
+            else
+            {
+                recievedStockViewModel = new RecievedStockViewModel();
+                recievedStockViewModel.Id = Guid.NewGuid().ToString();
+            }
+
+            recievedStockItemViewModel.RecieveStockId = recievedStockViewModel.Id;
             recievedStockViewModel.Items.Add(recievedStockItemViewModel);
-                
-            return View();
+
+            TempData["RSID2"] = JsonConvert.SerializeObject(recievedStockViewModel);
+
+            return RedirectToAction("Index");
         }
     }
 }
