@@ -1,7 +1,8 @@
-﻿@model StockIt.Core.Repositories.Stock.TemporaryStockItem
+﻿@using StockIt.Core.Repositories.StockItems;
+@model StockIt.Mvc.Models.StockItemViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Stock It";
 }
 
 <h1>Create</h1>
@@ -9,18 +10,31 @@
 <h4>TemporaryStockItem</h4>
 <hr />
 <div class="row">
+    <h5>Count: @ViewData["StockCount"]</h5>
     <div class="col-md-4">
         <form asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="Barcode" class="control-label"></label>
                 <input asp-for="Barcode" class="form-control" />
                 <span asp-validation-for="Barcode" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="StockActionItem" class="control-label"></label>
-                <select asp-for="StockActionItem" asp-items="@Model.StockActions" />
-            </div>*@
+            <div class="form-group">
+                <label asp-for="ActionType" class="control-label"></label>
+                <select asp-for="ActionType" class="form-control form-select" asp-items="Html.GetEnumSelectList<StockAction>()">
+                    <option selected="selected" value="">Please select</option>
+                </select>
+                <span asp-validation-for="ActionType" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationId" class="control-label"></label>
+                <select asp-for="LocationId" class="form-control form-select" asp-items="@Model.LocationList"></select>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

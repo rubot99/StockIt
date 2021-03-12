@@ -5,14 +5,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StockIt.Mvc.Models
 {
-    public class RecievedStockItemViewModel
+    public class StockItemViewModel
     {
-        [Required]
-        public string RecieveStockId { get; set; }
-
-        [Required]
-        public string Id { get; private set; } = Guid.NewGuid().ToString();
-
         [Required]
         public string Barcode { get; set; }
 

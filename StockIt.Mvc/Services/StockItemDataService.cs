@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using StockIt.Core.Repositories.StockItems;
 using StockIt.Core.Repositories.Tenants;
 using StockIt.Mvc.Common;
 using System;
@@ -31,6 +32,20 @@ namespace StockIt.Mvc.Services
         public Task<bool> DeleteAsync(string id, string tenant)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<StockItem>> GetAllAsync(string tenant)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}");
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+            var stockItems = new List<StockItem>();
+
+            if (response.IsSuccessStatusCode)
+            {
+                stockItems = JsonConvert.DeserializeObject<List<StockItem>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            }
+
+            return stockItems;
         }
 
         public async Task<List<KeyValuePair<string, string>>> GetStockActionsAsync()

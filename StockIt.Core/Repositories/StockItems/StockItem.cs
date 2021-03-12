@@ -3,13 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StockIt.Core.Repositories.StockItems
 {
-    public class RecievedStockItem
+    public class StockItem : BaseTenantModel
     {
         [Required]
-        public string RecieveStockId { get; private set; }
-
-        [Required]
-        public string Id { get; private set; } = Guid.NewGuid().ToString();
+        public string Id { get; private set; }
 
         [Required]
         public string Barcode { get; set; }
@@ -20,5 +17,11 @@ namespace StockIt.Core.Repositories.StockItems
 
         [Required]
         public string LocationId { get; set; }
+
+        public bool IsProcessed { get; set; }
+
+        public bool InError { get; set; }
+
+        public DateTime Created { get; set; }
     }
 }

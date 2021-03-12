@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StockIt.Core.Repositories.Stock;
 using StockIt.Core.Repositories.StockItems;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,24 @@ namespace StockIt.Api.Controllers.v1
     [ApiController]
     public class StockItemController : ControllerBase
     {
-        [HttpGet("stockactions")]
-        public IActionResult GetStockActions()
+        private readonly IStockItemRepository stockItemRepository;
+
+        public StockItemController(IStockItemRepository stockItemRepository)
         {
-            return Ok(new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>(StockAction.AddToStock.ToString(),StockAction.AddToStock.ToString()),
-                new KeyValuePair<string, string>(StockAction.RemoveFromStock.ToString(),StockAction.RemoveFromStock.ToString()),
-            });
+            this.stockItemRepository = stockItemRepository;
+        }
+
+        [HttpPost]
+        public IActionResult AddStockItem([FromBody] StockItem stockItem)
+        {
+            return Ok(stockItemRepository.Add(stockItem));
+        }
+
+        [HttpGet("tenant/{tenant}")]
+        public IActionResult GetAll([FromRoute] string tenant)
+        {
+            var stockItems = stockItemRepository.GetAll(tenant);
+            return Ok(stockItems);
         }
     }
 }
