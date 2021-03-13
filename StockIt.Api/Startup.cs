@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using StockIt.Core.Repositories.Locations;
 using StockIt.Core.Repositories.Products;
+using StockIt.Core.Repositories.StockItems;
 using StockIt.Core.Repositories.Tenants;
 
 namespace StockIt.Api
@@ -35,6 +36,7 @@ namespace StockIt.Api
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<ILocationRepository, LocationRepository>();
             services.AddTransient<ITenantRepository, TenantRepository>();
+            services.AddTransient<IStockItemRepository, StockItemRepository>();
 
             services.AddApiVersioning(config =>
             {

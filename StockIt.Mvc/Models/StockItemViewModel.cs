@@ -24,7 +24,8 @@ namespace StockIt.Mvc.Models
             {
                 Barcode = this.Barcode,
                 ActionType = this.ActionType,
-            }
+                LocationId = this.LocationId
+            };
         }
     }
 

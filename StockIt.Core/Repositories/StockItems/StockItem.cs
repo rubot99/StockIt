@@ -5,7 +5,6 @@ namespace StockIt.Core.Repositories.StockItems
 {
     public class StockItem : BaseTenantModel
     {
-        [Required]
         public string Id { get; set; }
 
         [Required]
@@ -17,6 +16,9 @@ namespace StockIt.Core.Repositories.StockItems
 
         [Required]
         public string LocationId { get; set; }
+
+        [Required]
+        public string Location { get; set; }
 
         public bool IsProcessed { get; set; }
 

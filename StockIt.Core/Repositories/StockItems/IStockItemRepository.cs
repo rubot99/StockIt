@@ -1,7 +1,6 @@
-﻿using StockIt.Core.Repositories.StockItems;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace StockIt.Core.Repositories.Stock
+namespace StockIt.Core.Repositories.StockItems
 {
     public interface IStockItemRepository : IRepository<StockItem>
     {

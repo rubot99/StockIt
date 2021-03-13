@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StockIt.Mvc.Services
 {
-    public interface IStockItemDataService : IDataService<Tenant>
+    public interface IStockItemDataService : IDataService<StockItem>
     {
         Task<List<StockItem>> GetAllAsync(string tenant);
     }

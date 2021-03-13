@@ -40,10 +40,11 @@ namespace StockIt.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(StockItemViewModel recievedStockItemViewModel)
+        public async Task<IActionResult> Create(StockItemViewModel recievedStockItemViewModel)
         {
-            var item = new Re
-            stockItemDataService.AddAsync(recievedStockItemViewModel);
+            var item = recievedStockItemViewModel.ConvertToStockItem();
+            item.Tenant = base.Tenant;
+            await stockItemDataService.AddAsync(item);
             return RedirectToAction("Index");
         }
     }

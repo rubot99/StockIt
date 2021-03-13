@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StockIt.Core.Repositories.Stock;
 using StockIt.Core.Repositories.StockItems;
 using System;
 using System.Collections.Generic;

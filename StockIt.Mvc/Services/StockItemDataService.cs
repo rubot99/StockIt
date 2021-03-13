@@ -6,6 +6,7 @@ using StockIt.Mvc.Common;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace StockIt.Mvc.Services
@@ -24,9 +25,14 @@ namespace StockIt.Mvc.Services
                 url = $"{stockApiConfig.Value?.Url}/stockitem";
             }
         }
-        public Task<Tenant> AddAsync(Tenant t)
+        public async Task<StockItem> AddAsync(StockItem t)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{url}");
+            request.Content = new StringContent(JsonConvert.SerializeObject(t), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+
+            return t;
         }
 
         public Task<bool> DeleteAsync(string id, string tenant)
@@ -36,7 +42,7 @@ namespace StockIt.Mvc.Services
 
         public async Task<List<StockItem>> GetAllAsync(string tenant)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/tenant/{tenant}");
             var response = await httpClient.SendAsync(request).ConfigureAwait(false);
             var stockItems = new List<StockItem>();
 
@@ -48,21 +54,21 @@ namespace StockIt.Mvc.Services
             return stockItems;
         }
 
-        public async Task<List<KeyValuePair<string, string>>> GetStockActionsAsync()
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/stockactions");
-            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
-            var stckActions = new List<KeyValuePair<string, string>>();
+        //////public async Task<List<KeyValuePair<string, string>>> GetStockActionsAsync()
+        //////{
+        //////    var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/stockactions");
+        //////    var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+        //////    var stckActions = new List<KeyValuePair<string, string>>();
 
-            if (response.IsSuccessStatusCode)
-            {
-                stckActions = JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-            }
+        //////    if (response.IsSuccessStatusCode)
+        //////    {
+        //////        stckActions = JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+        //////    }
 
-            return stckActions;
-        }
+        //////    return stckActions;
+        //////}
 
-        public Task<bool> UpdateAsync(Tenant t)
+        public Task<bool> UpdateAsync(StockItem t)
         {
             throw new NotImplementedException();
         }
