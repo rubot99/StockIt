@@ -2,18 +2,20 @@
 
 @{
     ViewData["Title"] = "Index";
+    int rowIndex = 1;
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a> |
+    <a asp-action="Create">Prcoess Stock</a>
 </p>
-<table class="table">
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                #
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Barcode)
@@ -37,10 +39,11 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @(rowIndex++)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Barcode)
@@ -61,11 +64,10 @@
                 @Html.DisplayFor(modelItem => item.Created)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id, tenant = item.Tenant }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id, tenant = item.Tenant })
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

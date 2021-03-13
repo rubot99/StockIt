@@ -24,6 +24,8 @@ namespace StockIt.Core.Repositories.StockItems
 
         public bool InError { get; set; }
 
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.UtcNow;
+
+        public DateTime Updated { get; set; } = DateTime.UtcNow;
     }
 }
