@@ -41,8 +41,9 @@ namespace StockIt.Mvc.Controllers
 
         [HttpPost]
         public IActionResult Create(StockItemViewModel recievedStockItemViewModel)
-        { 
-            ///stockItemDataService.
+        {
+            var item = new Re
+            stockItemDataService.AddAsync(recievedStockItemViewModel);
             return RedirectToAction("Index");
         }
     }

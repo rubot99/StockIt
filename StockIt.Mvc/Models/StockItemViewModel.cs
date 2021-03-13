@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using StockIt.Core.Repositories.StockItems;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace StockIt.Mvc.Models
@@ -18,5 +17,15 @@ namespace StockIt.Mvc.Models
         public string LocationId { get; set; }
 
         public SelectList LocationList { get; set; }
+
+        public StockItem ConvertToStockItem()
+        {
+            return new StockItem
+            {
+                Barcode = this.Barcode,
+                ActionType = this.ActionType,
+            }
+        }
     }
+
 }
