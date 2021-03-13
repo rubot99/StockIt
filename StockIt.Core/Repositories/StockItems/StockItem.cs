@@ -6,7 +6,7 @@ namespace StockIt.Core.Repositories.StockItems
     public class StockItem : BaseTenantModel
     {
         [Required]
-        public string Id { get; private set; }
+        public string Id { get; set; }
 
         [Required]
         public string Barcode { get; set; }

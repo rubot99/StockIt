@@ -40,7 +40,7 @@ namespace StockIt.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(StockItemViewModel recievedStockItemViewModel)
+        public IActionResult Create(StockItemViewModel recievedStockItemViewModel)
         { 
             ///stockItemDataService.
             return RedirectToAction("Index");

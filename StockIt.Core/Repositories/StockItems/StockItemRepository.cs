@@ -11,7 +11,16 @@ namespace StockIt.Core.Repositories.Stock
     {
         public StockItem Add(StockItem t)
         {
-            throw new NotImplementedException();
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                t.Id = string.Empty;
+
+                session.Store(t);
+
+                session.SaveChanges();
+
+                return t;
+            }
         }
 
         public bool Delete(StockItem t)
