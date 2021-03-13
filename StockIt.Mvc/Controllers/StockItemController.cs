@@ -27,7 +27,7 @@ namespace StockIt.Mvc.Controllers
         {
             var stockItems = await stockItemDataService.GetAllAsync(base.Tenant);
 
-            return View(stockItems);
+            return View(stockItems.FindAll(x => x.IsProcessed == false));
         }
 
         public async Task<IActionResult> Create()
@@ -50,5 +50,24 @@ namespace StockIt.Mvc.Controllers
             await stockItemDataService.AddAsync(item);
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Delete(string id, string tenant)
+        {
+            var product = await stockItemDataService.GetAsync(id, tenant).ConfigureAwait(false);
+            return View(product);
+        }
+
+        ////[HttpPost]
+        ////public async Task<IActionResult> Delete(Stock product)
+        ////{
+        ////    await stockItemDataService.DeleteAsync(product.Id, base.Tenant).ConfigureAwait(false);
+        ////    return RedirectToAction("Index", "Product");
+        ////}
+
+        ////public async Task<IActionResult> Edit(string id, string tenant)
+        ////{
+        ////    var product = await productDataService.GetAsync(id, tenant).ConfigureAwait(false);
+        ////    return View(product);
+        ////}
     }
 }

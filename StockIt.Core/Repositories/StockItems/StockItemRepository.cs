@@ -37,6 +37,16 @@ namespace StockIt.Core.Repositories.StockItems
             }
         }
 
+        public StockItem Get(string id, string tenant)
+        {
+            using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
+            {
+                return session.Query<StockItem>()
+                    .Where(x => x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase) && x.Id.Equals(id, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+        }
+
         public StockItem Update(StockItem t)
         {
             throw new NotImplementedException();
