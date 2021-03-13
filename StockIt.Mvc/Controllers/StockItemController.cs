@@ -7,6 +7,7 @@ using StockIt.Mvc.Models;
 using StockIt.Mvc.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace StockIt.Mvc.Controllers
@@ -42,8 +43,10 @@ namespace StockIt.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(StockItemViewModel recievedStockItemViewModel)
         {
+            var locations = await locationDataService.GetAllAsync(base.Tenant);
             var item = recievedStockItemViewModel.ConvertToStockItem();
             item.Tenant = base.Tenant;
+            item.Location = locations.FirstOrDefault(x => x.Id == item.LocationId).Name;
             await stockItemDataService.AddAsync(item);
             return RedirectToAction("Index");
         }
