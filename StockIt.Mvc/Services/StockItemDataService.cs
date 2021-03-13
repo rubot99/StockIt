@@ -54,6 +54,20 @@ namespace StockIt.Mvc.Services
             return stockItems;
         }
 
+        public async Task<StockItem> GetAsync(string id, string tenant)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/id/{id}tenant/{tenant}");
+            var response = await httpClient.SendAsync(request).ConfigureAwait(false);
+            var stockItem = new StockItem();
+
+            if (response.IsSuccessStatusCode)
+            {
+                stockItem = JsonConvert.DeserializeObject<StockItem>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            }
+
+            return stockItem;
+        }
+
         //////public async Task<List<KeyValuePair<string, string>>> GetStockActionsAsync()
         //////{
         //////    var request = new HttpRequestMessage(HttpMethod.Get, $"{url}/stockactions");

@@ -41,9 +41,11 @@ namespace StockIt.Core.Repositories.StockItems
         {
             using (IDocumentSession session = DocumentStoreHolder.Store.OpenSession())
             {
-                return session.Query<StockItem>()
-                    .Where(x => x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase) && x.Id.Equals(id, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
+                var stockItems = session.Query<StockItem>()
+                    .Where(x => x.Tenant.Equals(tenant, StringComparison.OrdinalIgnoreCase) &&
+                    x.Id.Equals(id, StringComparison.OrdinalIgnoreCase));
+
+                return stockItems.FirstOrDefault();
             }
         }
 

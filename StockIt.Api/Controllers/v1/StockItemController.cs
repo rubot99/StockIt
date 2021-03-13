@@ -36,8 +36,8 @@ namespace StockIt.Api.Controllers.v1
         [HttpGet("id/{id}tenant/{tenant}")]
         public IActionResult GetAll([FromRoute] string id, [FromRoute] string tenant)
         {
-            var stockItems = stockItemRepository.GetAll(tenant);
-            return Ok(stockItems);
+            var stockItem = stockItemRepository.Get(id, tenant);
+            return Ok(stockItem);
         }
     }
 }
